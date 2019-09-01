@@ -144,7 +144,7 @@ class Dash extends React.Component{
 }
 
 function getEvents(authData){
-	return fetch('http://localhost:3090/v1/events', {
+	return fetch('https://hartley6-backend-api.herokuapp.com/v1/events', {
 	  method: 'GET',
     mode: 'cors',
     headers: {
