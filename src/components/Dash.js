@@ -185,7 +185,7 @@ const styles = {
   },
   table:{
   	width: '90%',
-  	height: '100vh',
+  	height: '100%',
   	marginTop: '2%',
   },
   head:{
@@ -207,7 +207,7 @@ const styles = {
   	fontSize: '20px',
   }, 
   tr:{
-  	paddingBottom: '15px',
+  	paddingBottom: '',
   },
   button:{
     width: '10vw',
