@@ -22,7 +22,7 @@ class Dash extends React.Component{
 
 	sendRequest(){
 		console.log(this.props.authData)
-    fetch('http://localhost:3090/v1/event', {
+    fetch('https://hartley6-backend-api.herokuapp.com/v1/event', {
       method: 'POST',
       mode: 'cors',
       headers: {

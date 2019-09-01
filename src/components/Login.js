@@ -13,7 +13,7 @@ class Login extends React.Component{
 	}
 
   sendRequest(){
-    fetch('http://localhost:3090/v1/login', {
+    fetch('https://hartley6-backend-api.herokuapp.com/v1/login', {
       method: 'POST',
       mode: 'cors',
       headers: {
