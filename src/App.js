@@ -11,6 +11,7 @@ class App extends React.Component {
       authenticated: false,
       authToken: '',
       userId: 0,
+      admin: false,
     }
     this.authenticate = this.authenticate.bind(this)
   }
@@ -20,6 +21,7 @@ class App extends React.Component {
       authenticated: true,
       authToken: obj.access_token,
       userId: obj.user_id,
+      admin: obj.admin
     })
   }
 

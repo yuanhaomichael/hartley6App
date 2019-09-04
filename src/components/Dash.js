@@ -164,7 +164,7 @@ class Dash extends React.Component{
 					</form>
 				</Modal>
 				<div style={styles.header}>
-					<span style={styles.coins}>Coins: --</span>
+					<span style={styles.coins}>Coins: 100</span>
 					<h2>Welcome to the Hartley 6 Community Dashboard</h2>
 					<span onClick={this.openModal} style={styles.newEventBtn} className='noselect newEventBtn'>+</span>
 				</div>
@@ -238,6 +238,7 @@ const styles = {
     margin: 'auto',
     top: '10%',
     position: 'relative',
+    width: '100%'
   },
   form:{
   	width: '80%',

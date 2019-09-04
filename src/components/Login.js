@@ -86,11 +86,11 @@ const styles = {
     position: 'relative',
   },
   form:{
-    width: '70%',
+    width: '80%',
     margin: 'auto',
   },
   button:{
-    width: '10vw',
+    width: '20vw',
     height: '4vh',
     borderRadius: '10px',
     backgroundColor: '#47b8e0',
