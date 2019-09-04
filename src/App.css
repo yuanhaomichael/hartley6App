@@ -2,10 +2,21 @@
   text-align: center;
   width: 100%;
 }
-
+.main{
+  width: 90%
+}
+.main-lg{
+  width: 60%
+}
+.modal{
+  width: 50%
+}
+.hide-col{
+  display: block
+}
 input{
 	border: 0;
-	border-bottom: 3px solid #47b8e0;
+	border-bottom: 3px solid #B9D9EB;
 	width: 100%;
 	font-size: 20px;
 }
@@ -21,6 +32,7 @@ input:focus{
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
+
 //Preset Keyframes
 @keyframes App-logo-spin {
   from {
@@ -28,5 +40,31 @@ input:focus{
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .main{
+    width: 100%;
+  }
+  .main-lg{
+    width: 100%
+  }
+  .modal{
+    width: 90%
+  }
+  .hide-col{
+    display: none
+  }
+  .newEventBtn{
+    right: 10;
+    top: 3;
+    position: absolute;
+    font-weight: bold;
+    font-size: 50px;
+    cursor: pointer;
+  }
+  .table-text{
+    font-size: 10px;
   }
 }

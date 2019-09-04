@@ -13,7 +13,7 @@ class Modal extends React.Component{
 		return(
 			<div style={{display: this.props.display}}>
 				<div style={styles.overlay}>
-					<div style={styles.modal}>
+					<div class='modal' style={styles.modal}>
 						{this.props.children}
 					</div>
 				</div>
@@ -37,7 +37,6 @@ const styles = {
 		backgroundColor: 'white',
 		borderRadius: '15px',
 		top: '10',
-		width: '50vw',
 	}
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-
+import ls from 'local-storage'
 import LoginCard from './components/Login'
 import Dashboard from './components/Dash'
 
@@ -15,6 +15,7 @@ class App extends React.Component {
     this.authenticate = this.authenticate.bind(this)
   }
   authenticate(obj){
+    ls.set('hartley_email', obj.email)
     this.setState({
       authenticated: true,
       authToken: obj.access_token,
@@ -22,18 +23,12 @@ class App extends React.Component {
     })
   }
 
+
   render(){
-    console.log(this.state)
     return (
       <div className="App">
-        {
-          !this.state.authenticated && 
-          <LoginCard authenticate={this.authenticate} />
-        }
-        {
-          this.state.authenticated &&
+          {!this.state.authenticated && <LoginCard authenticate={this.authenticate} />}
           <Dashboard authData={this.state} />
-        }
       </div>
     );
   }
