@@ -273,7 +273,8 @@ const styles = {
   	fontSize: '20px',
   }, 
   tr:{
-  	paddingBottom: '',
+  	backgroundColor: 'red',
+  	width: '100%'
   },
   button:{
     width: '10vw',
