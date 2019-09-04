@@ -171,19 +171,19 @@ class Dash extends React.Component{
 				<div style={styles.body}>
 					<table style={styles.table}>
 					<col width='40%' />
-					<col width='15%' />
+					<col class='hide-col' width='15%' />
 					<col class='hide-col' width='15%' />
 					<col width='10%' />
 					<col width='10%' />
 					<col width='5%' />
-					<col width='5%' />
+					<col class='hide-col' width='5%' />
 						<thead style={styles.head}>
 								<tr>
 									<td>Event Title</td>
-									<td>Host</td>
+									<td class='hide-col'>Host</td>
 									<td class='hide-col'>Category</td>
 									<td>Time</td>
-									<td>Availability</td>
+									<td class='hide-col'>Availability</td>
 								</tr>
 						</thead>
 						<tbody style={{backgroundColor: 'blue', width: '100%'}}>
@@ -191,10 +191,10 @@ class Dash extends React.Component{
 							return (
 								<tr class='table-text' style={styles.tr} key={ev.id}>
 									<td>{ev.title}</td>
-									<td>{ev.host}</td>
+									<td class='hide-col'>{ev.host}</td>
 									<td class='hide-col'>{ev.category}</td>
 									<td>{ev.time}</td>
-									<td>{ev.availability}</td>
+									<td class='hide-col'>{ev.availability}</td>
 									<td><button onClick={() => this.join(ev.id)}>Join</button></td>
 									<td><button onClick={() => this.trash(ev.id)}>Remove</button></td>
 								</tr>
@@ -258,7 +258,7 @@ const styles = {
   	fontWeight: 'bold',
   },
   newEventBtn:{
-    right: 25,
+    right: 15,
     top: 60,
     position: 'absolute',
     fontWeight: 'bold',
@@ -266,14 +266,13 @@ const styles = {
     cursor: 'pointer',
   },
    coins:{
-  	left: 20,
+  	left: 10,
   	top: 75,
   	position: 'absolute',
   	fontWeight: 'bold',
   	fontSize: '20px',
   }, 
   tr:{
-  	backgroundColor: 'red',
   	width: '100%'
   },
   button:{
