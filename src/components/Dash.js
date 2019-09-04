@@ -186,7 +186,7 @@ class Dash extends React.Component{
 									<td>Availability</td>
 								</tr>
 						</thead>
-						<tbody>
+						<tbody style={{backgroundColor: 'blue', width: '100%'}}>
 						{this.state.events.map((ev) => {
 							return (
 								<tr class='table-text' style={styles.tr} key={ev.id}>
@@ -258,7 +258,7 @@ const styles = {
   	fontWeight: 'bold',
   },
   newEventBtn:{
-    right: 50,
+    right: 25,
     top: 60,
     position: 'absolute',
     fontWeight: 'bold',
@@ -266,7 +266,7 @@ const styles = {
     cursor: 'pointer',
   },
    coins:{
-  	left: 50,
+  	left: 20,
   	top: 75,
   	position: 'absolute',
   	fontWeight: 'bold',
@@ -277,7 +277,7 @@ const styles = {
   	width: '100%'
   },
   button:{
-    width: '10vw',
+    width: '20vw',
     height: '4vh',
     borderRadius: '10px',
     backgroundColor: '#47b8e0',
