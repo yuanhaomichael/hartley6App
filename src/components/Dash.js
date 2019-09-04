@@ -259,7 +259,7 @@ const styles = {
   },
   newEventBtn:{
     right: 50,
-    top: 50,
+    top: 60,
     position: 'absolute',
     fontWeight: 'bold',
     fontSize: '50px',
@@ -267,7 +267,7 @@ const styles = {
   },
    coins:{
   	left: 50,
-  	top: 65,
+  	top: 75,
   	position: 'absolute',
   	fontWeight: 'bold',
   	fontSize: '20px',
