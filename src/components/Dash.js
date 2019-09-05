@@ -51,9 +51,9 @@ class Dash extends React.Component{
 									<td>{ev.title}</td>
 									<td>{ev.host}</td>
 									<td className='hide-col'>{ev.category}</td>
-									<td>{ev.time}</td>
+									<td>{parseDate(ev.time)}</td>
 									<td className='hide-col'>{ev.availability}</td>
-									<td><button onClick={() => this.join(ev.id)}><FontAwesomeIcon icon={faCheckCircle} /></button></td>
+									{(this.props.authData.authToken.length > 0) && <td><button onClick={() => this.join(ev.id)}><FontAwesomeIcon icon={faCheckCircle} /></button></td>}
 									{this.props.authData.admin && <td><button onClick={() => this.trash(ev.id)}>Remove</button></td>}
 								</tr>
 											)
@@ -66,7 +66,11 @@ class Dash extends React.Component{
 	}
 }
 
-
+function parseDate(date){
+	let v1 = date.replace('T', '@').replace('2019-', '')
+	let v2 = v1.split('@')[1]
+	return v1
+}
 
 const styles = {
   main:{

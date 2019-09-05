@@ -73,7 +73,8 @@ const styles = {
     height: '30vh',
     backgroundColor: 'white',
     boxShadow: "0px 3px 15px rgba(0,0,0,0.2)",
-    borderRadius: '15px',
+    borderRadius: '15px', 
+    margin: 'auto'
   },
   header:{
   	margin: 'auto',

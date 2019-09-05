@@ -22,6 +22,8 @@ class App extends React.Component {
     this.authenticate = this.authenticate.bind(this)
   }
 
+
+
   componentDidMount(){
     getEvents(this.state)
     .then((res) => res.json())
@@ -41,7 +43,6 @@ class App extends React.Component {
       admin: obj.admin
     })
   }
-
   join(id){
     fetch(BACKEND_API_URI + 'event', {
       method: 'PUT',
@@ -72,7 +73,6 @@ class App extends React.Component {
     })
     .catch((err) => alert('Failed to join event. ERROR: ') + err)
   }
-
   trash(id){
     fetch(BACKEND_API_URI + 'event', {
       method: 'DELETE',
@@ -103,6 +103,9 @@ class App extends React.Component {
     })
     .catch((err) => alert('Failed to delete event. ERROR: ') + err)
   }
+
+
+
   render(){
     return (
       <div className="App">
