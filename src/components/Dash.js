@@ -164,9 +164,9 @@ class Dash extends React.Component{
 					</form>
 				</Modal>
 				<div style={styles.header}>
-					<span style={styles.coins}>Coins: 100</span>
+					<span class='hide-col' style={styles.coins}>Coins: 100</span>
 					<h2>Welcome to the Hartley 6 Community Dashboard</h2>
-					{(this.props.authData.email == 'yd2473@columbia.edu') &&<span onClick={this.openModal} style={styles.newEventBtn} className='noselect newEventBtn'>+</span>}
+					{(this.props.authData.email == 'yd2473@columbia.edu' || 'isaiah_thompkins@brown.edu') &&<span onClick={this.openModal} style={styles.newEventBtn} className='noselect newEventBtn'>+</span>}
 				</div>
 				<div style={styles.body}>
 					<table style={styles.table}>
@@ -196,7 +196,7 @@ class Dash extends React.Component{
 									<td>{ev.time}</td>
 									<td class='hide-col'>{ev.availability}</td>
 									<td><button onClick={() => this.join(ev.id)}>Join</button></td>
-									{(this.props.authData.email == 'yd2473@columbia.edu') && <td><button onClick={() => this.trash(ev.id)}>Remove</button></td>}
+									{(this.props.authData.email == 'yd2473@columbia.edu' || 'isaiah_thompkins@brown.edu') && <td><button onClick={() => this.trash(ev.id)}>Remove</button></td>}
 								</tr>
 											)
 						})}
