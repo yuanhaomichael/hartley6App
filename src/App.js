@@ -14,6 +14,7 @@ class App extends React.Component {
       authToken: '',
       userId: 0,
       admin: false,
+      coins: 0,
       events: [],
     }
 
@@ -40,7 +41,8 @@ class App extends React.Component {
       authenticated: true,
       authToken: obj.access_token,
       userId: obj.user_id,
-      admin: obj.admin
+      admin: obj.admin,
+      coins: obj.coins,
     })
   }
   join(id){

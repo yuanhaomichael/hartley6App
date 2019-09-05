@@ -93,7 +93,7 @@ class Header extends React.Component{
 
 				<div>
 					<div style={styles.div}>
-						<span style={styles.headerText}>Coins: 100</span>
+						<span style={styles.headerText}>Coins: {this.props.authData.coins}</span>
 					</div>
 					<div style={styles.div}>
 						<span style={styles.headerText}>Hartley 6</span>
