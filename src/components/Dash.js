@@ -170,13 +170,13 @@ class Dash extends React.Component{
 				</div>
 				<div style={styles.body}>
 					<table style={styles.table}>
-					<col width='40%'>
-					<col width='10%'>
-					<col width='10%'>
-					<col width='10%'>
-					<col width='10%'>
-					<col width='5%'>
-					<col width='5%'>
+					<col width='40%' />
+					<col width='10%' />
+					<col width='10%' />
+					<col width='10%' />
+					<col width='10%' />
+					<col width='5%' />
+					<col width='5%' />
 						<thead style={styles.head}>
 								<tr>
 									<th>Event Title</th>
