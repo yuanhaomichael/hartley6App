@@ -38,6 +38,7 @@ class Login extends React.Component{
     })
     .then((res) => res.json())
     .then((json) => {
+    	console.log(json)
       this.props.authenticate(json)
     })
     .catch((err) => {

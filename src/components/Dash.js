@@ -166,12 +166,12 @@ class Dash extends React.Component{
 				<div style={styles.header}>
 					<span style={styles.coins}>Coins: 100</span>
 					<h2>Welcome to the Hartley 6 Community Dashboard</h2>
-					<span onClick={this.openModal} style={styles.newEventBtn} className='noselect newEventBtn'>+</span>
+					{(this.props.authData.email == 'yd2473@columbia.edu') &&<span onClick={this.openModal} style={styles.newEventBtn} className='noselect newEventBtn'>+</span>}
 				</div>
 				<div style={styles.body}>
 					<table style={styles.table}>
 					<col width='40%' />
-					<col class='hide-col' width='15%' />
+					<col width='15%' />
 					<col class='hide-col' width='15%' />
 					<col width='10%' />
 					<col width='10%' />
@@ -180,23 +180,23 @@ class Dash extends React.Component{
 						<thead style={styles.head}>
 								<tr>
 									<td>Event Title</td>
-									<td class='hide-col'>Host</td>
+									<td>Host</td>
 									<td class='hide-col'>Category</td>
 									<td>Time</td>
 									<td class='hide-col'>Availability</td>
 								</tr>
 						</thead>
-						<tbody style={{backgroundColor: 'blue', width: '100%'}}>
+						<tbody style={{width: '100%'}}>
 						{this.state.events.map((ev) => {
 							return (
 								<tr class='table-text' style={styles.tr} key={ev.id}>
 									<td>{ev.title}</td>
-									<td class='hide-col'>{ev.host}</td>
+									<td>{ev.host}</td>
 									<td class='hide-col'>{ev.category}</td>
 									<td>{ev.time}</td>
 									<td class='hide-col'>{ev.availability}</td>
 									<td><button onClick={() => this.join(ev.id)}>Join</button></td>
-									<td><button onClick={() => this.trash(ev.id)}>Remove</button></td>
+									{(this.props.authData.email == 'yd2473@columbia.edu') && <td><button onClick={() => this.trash(ev.id)}>Remove</button></td>}
 								</tr>
 											)
 						})}
@@ -249,7 +249,7 @@ const styles = {
   	padding: '20px',
   },
   table:{
-  	width: '90%',
+  	width: '100%',
   	height: '100%',
   	marginTop: '2%',
   	marginBottom: '10%',
@@ -273,10 +273,10 @@ const styles = {
   	fontSize: '20px',
   }, 
   tr:{
-  	width: '100%'
+  	width: '100%',
   },
   button:{
-    width: '20vw',
+    width: '50vw',
     height: '4vh',
     borderRadius: '10px',
     backgroundColor: '#47b8e0',
