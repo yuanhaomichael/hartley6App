@@ -184,7 +184,7 @@ class Dash extends React.Component{
 						{this.state.events.map((ev) => {
 							return (
 								<tr class='table-text' style={styles.tr} key={ev.id}>
-									<td style={{width: "40%"}}>{ev.title}</td>
+									<td >{ev.title}</td>
 									<td>{ev.host}</td>
 									<td class='hide-col'>{ev.category}</td>
 									<td>{ev.time}</td>
