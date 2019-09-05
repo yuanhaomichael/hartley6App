@@ -15,11 +15,10 @@ class Login extends React.Component{
 		this.sendRequest = this.sendRequest.bind(this)
 	}
 
-	componentWillMount(){
-		if (ls.get('hartely_email') !== '' || ls.get('hartely_email') !== null || ls.get('hartely_email') !== undefined ){
-			console.log(ls.get('hartely_email'))
+	componentDidMount(){
+		if (ls.get('hartley_email') !== '' || ls.get('hartley_email') !== null || ls.get('hartley_email') !== undefined ){
 			this.setState({
-				email: ls.get('hartley_email')
+				email: (ls.get('hartley_email') == undefined ? "" : ls.get('hartley_email'))
 			})
 		}
 	}
@@ -49,12 +48,12 @@ class Login extends React.Component{
 
 	render(){
 		return(
-			<div class='main-lg' style={styles.main}>
+			<div className='main-lg' style={styles.main}>
 				<div style={styles.header}>
 					<h3>Welcome Hartley 6 Resident</h3>
 				</div>
 				<div style={styles.body}>
-					<form style={styles.form}>
+					<form style={styles.form} onSubmit={e => { e.preventDefault() }}>
 						<div style={styles.input_div}>
 							<input onChange={(ev) => this.setState({email: ev.target.value})} value={this.state.email} placeholder='email' />
 						</div>
@@ -71,12 +70,10 @@ class Login extends React.Component{
 }
 const styles = { 
   main:{
-    height: '40vh',
-    margin: 'auto',
+    height: '30vh',
     backgroundColor: 'white',
     boxShadow: "0px 3px 15px rgba(0,0,0,0.2)",
     borderRadius: '15px',
-    marginTop: '30px'
   },
   header:{
   	margin: 'auto',
@@ -100,7 +97,6 @@ const styles = {
     margin: 'auto',
     color: 'white',
     fontWeight: 'bold',
-    marginTop: '15px',
     padding: '5px',
   },
   input_div:{

@@ -1,5 +1,6 @@
 html, body{
   width: 100%;
+  font-family: avenir;
 }
 .App {
   text-align: center;
@@ -12,7 +13,8 @@ html, body{
   width: 60%
 }
 .modal{
-  width: 50%
+  width: 50%;
+  z-index: 30;
 }
 .hide-col{
   display: block
@@ -22,6 +24,7 @@ input{
 	border-bottom: 3px solid #B9D9EB;
 	width: 100%;
 	font-size: 20px;
+  text-align: center; 
 }
 input:focus{
 	outline: none;
