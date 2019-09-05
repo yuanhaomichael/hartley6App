@@ -170,7 +170,13 @@ class Dash extends React.Component{
 				</div>
 				<div style={styles.body}>
 					<table style={styles.table}>
-
+					<col width='40%'>
+					<col width='10%'>
+					<col width='10%'>
+					<col width='10%'>
+					<col width='10%'>
+					<col width='5%'>
+					<col width='5%'>
 						<thead style={styles.head}>
 								<tr>
 									<th>Event Title</th>
@@ -184,7 +190,7 @@ class Dash extends React.Component{
 						{this.state.events.map((ev) => {
 							return (
 								<tr class='table-text' style={styles.tr} key={ev.id}>
-									<td >{ev.title}</td>
+									<td>{ev.title}</td>
 									<td>{ev.host}</td>
 									<td class='hide-col'>{ev.category}</td>
 									<td>{ev.time}</td>

@@ -1,9 +1,6 @@
 html, body{
   width: 100%;
 }
-th, td{
-  width: 25%;
-}
 .App {
   text-align: center;
   width: 100%;
