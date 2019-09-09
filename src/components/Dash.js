@@ -68,7 +68,7 @@ class Dash extends React.Component{
 
 function parseDate(date){
 	let v1 = date.replace('T', '@').replace('2019-', '')
-	let sub = v1.subtring(v1.indexOf('@'), v1.length)
+	let sub = v1.substring(v1.indexOf('@'), v1.length)
 	return v1.split(':', 2).join(':')
 }
 
