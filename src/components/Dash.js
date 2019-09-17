@@ -45,8 +45,18 @@ class Dash extends React.Component{
 								</tr>
 						</thead>
 						<tbody style={{width: '100%'}}>
-						{this.props.events.map((ev) => {
+						{this.props.events.map((ev, i) => {
+							let today = new Date().getTime()
+							let curr_ev_time = new Date(ev.time.replace(ev.time.substring(ev.time.indexOf('T'), ev.time.length), "")).getTime()
+							let prev_ev_time = (this.props.events[i-1] ? new Date(this.props.events[i-1].time.replace(this.props.events[i-1].time.substring(this.props.events[i-1].time.indexOf('T'), this.props.events[i-1].time.length), "")).getTime() : 0)
+							let diff_time = (curr_ev_time != prev_ev_time || prev_ev_time == 0 ? true : false)
+							let date = new Date(curr_ev_time)
+							let label = (!diff_time ? null : <tr><b>{
+									(date.getUTCMonth() + 1).toString() + "/" + (date.getUTCDate()).toString() + "/" + (date.getUTCFullYear()).toString() + " " + (curr_ev_time == today ? "TODAY" : "")
+								}</b></tr>);
 							return (
+								<>
+								{label}
 								<tr className='table-text' style={styles.tr} key={ev.id}>
 									<td>{ev.title}</td>
 									<td>{ev.host}</td>
@@ -56,7 +66,8 @@ class Dash extends React.Component{
 									{(this.props.authData.authToken.length > 0) && <td><button onClick={() => this.join(ev.id)}><FontAwesomeIcon icon={faCheckCircle} /></button></td>}
 									{this.props.authData.admin && <td><button onClick={() => this.trash(ev.id)}>Remove</button></td>}
 								</tr>
-											)
+								</>
+							)
 						})}
 						</tbody>
 					</table>
@@ -69,7 +80,10 @@ class Dash extends React.Component{
 function parseDate(date){
 	let v1 = date.replace('T', '@').replace('2019-', '')
 	let sub = v1.substring(v1.indexOf('@'), v1.length)
-	return v1.split(':', 2).join(':')
+	let milTime = v1.split(':', 2).join(':').replace(v1.split(':', 2).join(':').substring(0,v1.split(':', 2).join(':').indexOf('@') + 1), "")
+	let normHour = (parseInt(milTime.split(':')[0]) > 12 ? parseInt(milTime.split(':')[0]) - 12 : parseInt(milTime.split(':')[0])).toString()
+	let time = milTime.replace(milTime.substring(0,2), normHour)
+	return time
 }
 
 const styles = {

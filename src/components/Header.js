@@ -50,7 +50,8 @@ class Header extends React.Component{
 					button_text: 'Submit Event',
 					modal_display: 'none',        	
         })
-    	this.props.events(json)
+    	console.log(json)
+    	this.props.events(json.events)
     })
     .catch((err) => alert('Failed to create event. ERROR: ' + err))	
 	}	

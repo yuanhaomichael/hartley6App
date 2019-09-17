@@ -35,6 +35,7 @@ class App extends React.Component {
       alert('There was an error retrieving events. ERROR: ' + err)
     })
   }
+
   authenticate(obj){
     ls.set('hartley_email', obj.email)
     this.setState({
@@ -111,7 +112,7 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-          {this.state.authenticated && <Header authData={this.state} events={(json) => this.setState({events: [...this.state.events, json]})}/>}
+          {this.state.authenticated && <Header authData={this.state} events={(json) => this.setState({events: json})}/>}
           {!this.state.authenticated && <LoginCard authenticate={this.authenticate} />}
           <Dashboard events={this.state.events} authData={this.state} join={(id) => this.join(id)} trash={(id) => this.trash(id)}/>
       </div>
