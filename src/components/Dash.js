@@ -64,7 +64,7 @@ class Dash extends React.Component{
 									<td>{parseDate(ev.time)}</td>
 									<td className='hide-col'>{ev.availability}</td>
 									{(this.props.authData.authToken.length > 0) && <td><button onClick={() => this.join(ev.id)}><FontAwesomeIcon icon={faCheckCircle} /></button></td>}
-									{this.props.authData.admin && <td><button onClick={() => this.trash(ev.id)}>Remove</button></td>}
+									{this.props.authData.userId == 69 ||  this.props.authData.userId == 46 && <td><button onClick={() => this.trash(ev.id)}>Remove</button></td>}
 								</tr>
 								</>
 							)
