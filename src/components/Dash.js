@@ -81,8 +81,8 @@ function parseDate(date){
 	let v1 = date.replace('T', '@').replace('2019-', '')
 	let sub = v1.substring(v1.indexOf('@'), v1.length)
 	let milTime = v1.split(':', 2).join(':').replace(v1.split(':', 2).join(':').substring(0,v1.split(':', 2).join(':').indexOf('@') + 1), "")
-	let normHour = (parseInt(milTime.split(':')[0]) > 12 ? parseInt(milTime.split(':')[0]) - 12 : parseInt(milTime.split(':')[0])).toString()
-	let time = milTime.replace(milTime.substring(0,2), normHour)
+	let time = (parseInt(milTime.split(':')[0]) > 12 ? milTime.replace(milTime.substring(0,2), parseInt(milTime.split(':')[0]) - 12) + " PM" : milTime.replace(milTime.substring(0,2), parseInt(milTime.split(':')[0])) + " AM")
+	console.log(time)
 	return time
 }
 
