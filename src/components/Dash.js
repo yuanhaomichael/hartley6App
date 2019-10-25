@@ -55,7 +55,7 @@ class Dash extends React.Component{
 									(date.getUTCMonth() + 1).toString() + "/" + (date.getUTCDate()).toString() + "/" + (date.getUTCFullYear()).toString() + " " + (curr_ev_time == today ? "TODAY" : "")
 								}</b></tr>);
 							return (
-								<>
+								<React.Fragment>
 								{label}
 								<tr className='table-text' style={styles.tr} key={ev.id}>
 									<td>{ev.title}</td>
@@ -63,10 +63,10 @@ class Dash extends React.Component{
 									<td className='hide-col'>{ev.category}</td>
 									<td>{parseDate(ev.time)}</td>
 									<td className='hide-col'>{ev.availability}</td>
-									{(this.props.authData.authToken.length > 0) && <td><button onClick={() => this.join(ev.id)}><FontAwesomeIcon icon={faCheckCircle} /></button></td>}
+									{(this.props.authData.token.length > 0) && <td><button onClick={() => this.join(ev.id)}><FontAwesomeIcon icon={faCheckCircle} /></button></td>}
 									{this.props.authData.userId == 69 ||  this.props.authData.userId == 46 && <td><button onClick={() => this.trash(ev.id)}>Remove</button></td>}
 								</tr>
-								</>
+								</React.Fragment>
 							)
 						})}
 						</tbody>
@@ -82,7 +82,6 @@ function parseDate(date){
 	let sub = v1.substring(v1.indexOf('@'), v1.length)
 	let milTime = v1.split(':', 2).join(':').replace(v1.split(':', 2).join(':').substring(0,v1.split(':', 2).join(':').indexOf('@') + 1), "")
 	let time = (parseInt(milTime.split(':')[0]) > 12 ? milTime.replace(milTime.substring(0,2), parseInt(milTime.split(':')[0]) - 12) + " PM" : milTime.replace(milTime.substring(0,2), parseInt(milTime.split(':')[0])) + " AM")
-	console.log(time)
 	return time
 }
 

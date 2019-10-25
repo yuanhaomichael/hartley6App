@@ -1,6 +1,5 @@
 import React from 'react'
 import '../App.css';
-import ls from 'local-storage'
 
 import { BACKEND_API_URI }from '../constants'
 
@@ -8,20 +7,14 @@ class Login extends React.Component{
 	constructor(props){
 		super(props)
 		this.state = {
-			email: '',
+			email: 'isaiah_thompkins@alumni.brown.edu',
+      phone: '',
 			password: 'foobar',
-			button_text: 'Log In'
+			button_text: 'Sign In'
 		}
 		this.sendRequest = this.sendRequest.bind(this)
 	}
 
-	componentDidMount(){
-		if (ls.get('hartley_email') !== '' || ls.get('hartley_email') !== null || ls.get('hartley_email') !== undefined ){
-			this.setState({
-				email: (ls.get('hartley_email') == undefined ? "" : ls.get('hartley_email'))
-			})
-		}
-	}
   sendRequest(){
    return fetch(BACKEND_API_URI + 'login', {
       method: 'POST',
@@ -33,9 +26,9 @@ class Login extends React.Component{
       body: JSON.stringify({
               email: this.state.email,
               password: this.state.password,
+              phone: this.state.phone,
             }),
     })
-    .then((res) => res.json())
     .then((json) => {
     	console.log(json)
       this.props.authenticate(json)
@@ -57,8 +50,13 @@ class Login extends React.Component{
 						<div style={styles.input_div}>
 							<input onChange={(ev) => this.setState({email: ev.target.value})} value={this.state.email} placeholder='email' />
 						</div>
+            <div style={styles.input_div}>
+              <input onChange={(ev) => this.setState({phone: ev.target.value})} value={this.state.phone} placeholder='Phone' />
+            </div>           
 						<div>
-							<div onMouseDown={(ev) => this.setState({button_text: 'Signing In...'})} onMouseUp={this.sendRequest} style={styles.button} className='noselect'>
+							<div onMouseDown={(ev) => this.setState({button_text: 'Signing In...'})} onMouseUp={() => {
+                this.props.authenticate(this.state.email, this.state.password, this.state.phone)
+              }} style={styles.button} className='noselect'>
 								{this.state.button_text}
 							</div>
 						</div>

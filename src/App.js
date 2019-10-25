@@ -1,8 +1,13 @@
 import React from 'react';
 import './App.css';
-import ls from 'local-storage'
+import { logInFunc } from './actions'
+import { connect } from 'react-redux'
+import Interests from './components/Interests'
+import AllEvents from './components/AllEvents'
+import InterestingEvents from './components/InterestingEvents'
 import Header from './components/Header'
 import LoginCard from './components/Login'
+
 import Dashboard from './components/Dash'
 import { BACKEND_API_URI }from './constants'
 
@@ -10,17 +15,13 @@ class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      authenticated: false,
-      authToken: '',
-      userId: 0,
-      admin: false,
+      refresh: true,
       coins: 0,
       events: [],
     }
 
     this.trash = this.trash.bind(this)
     this.join = this.join.bind(this)
-    this.authenticate = this.authenticate.bind(this)
   }
 
 
@@ -36,16 +37,6 @@ class App extends React.Component {
     })
   }
 
-  authenticate(obj){
-    ls.set('hartley_email', obj.email)
-    this.setState({
-      authenticated: true,
-      authToken: obj.access_token,
-      userId: obj.user_id,
-      admin: obj.admin,
-      coins: obj.coins,
-    })
-  }
   join(id){
     fetch(BACKEND_API_URI + 'event', {
       method: 'PUT',
@@ -53,10 +44,11 @@ class App extends React.Component {
       headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
+          'authToken': this.props.auth.token
           // 'Content-Type': 'application/x-www-form-urlencoded',
       },      
       body: JSON.stringify({
-              userId: this.state.userId,
+              userId: this.props.auth.userId,
               eventId: id,
             }),     
     })
@@ -76,6 +68,7 @@ class App extends React.Component {
     })
     .catch((err) => alert('Failed to join event. ERROR: ') + err)
   }
+
   trash(id){
     fetch(BACKEND_API_URI + 'event', {
       method: 'DELETE',
@@ -83,10 +76,11 @@ class App extends React.Component {
       headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
+          'authToken': this.props.auth.token
           // 'Content-Type': 'application/x-www-form-urlencoded',
       },      
       body: JSON.stringify({
-              userId: this.state.userId,
+              userId: this.props.auth.userId,
               eventId: id,
             }),     
     })
@@ -110,11 +104,14 @@ class App extends React.Component {
 
 
   render(){
+    console.log(this.props.auth)
     return (
       <div className="App">
-          {this.state.authenticated && <Header authData={this.state} events={(json) => this.setState({events: json})}/>}
-          {!this.state.authenticated && <LoginCard authenticate={this.authenticate} />}
-          <Dashboard events={this.state.events} authData={this.state} join={(id) => this.join(id)} trash={(id) => this.trash(id)}/>
+          {this.props.auth.authenticated && <Header authData={this.props.auth} events={(json) => this.setState({events: json})} />}
+          {!this.props.auth.authenticated && <LoginCard authenticate={(email, password, phone) => this.props.login(email, password, phone)} />}
+          <Interests />
+          <InterestingEvents join={this.join} events={[]}/>
+          <AllEvents join={(id) => this.join(id)} events={this.state.events}/>
       </div>
     );
   }
@@ -130,4 +127,16 @@ function getEvents(authData){
     },
   })
 }
-export default App;
+function mapStateToProps(state){
+  return {
+    auth: state.authReducer
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    login: (email, password) => dispatch(logInFunc(email, password)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

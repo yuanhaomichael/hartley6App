@@ -1,5 +1,7 @@
 import React from 'react'
 import Modal from './Modal'
+import { persistor } from '../configureStore'
+
 import { BACKEND_API_URI }from '../constants'
 
 class Header extends React.Component{
@@ -27,16 +29,17 @@ class Header extends React.Component{
       mode: 'cors',
       headers: {
           'Content-Type': 'application/json',
+          'authToken': this.props.authData.token
           // 'Content-Type': 'application/x-www-form-urlencoded',
       },      
       body: JSON.stringify({
               userId: this.props.authData.userId,
-              authToken: this.props.authData.authToken,
-							title: this.state.title,
-							category: this.state.category,
-							host: this.state.host,
-							time: this.state.time,
-							availability: this.state.availability,
+              authToken: this.props.authData.token,
+				title: this.state.title,
+				category: this.state.category,
+				host: this.state.host,
+				time: this.state.time,
+				availability: this.state.availability,
             }),
     })
     .then((res) => res.json())
@@ -93,6 +96,12 @@ class Header extends React.Component{
 				</Modal>
 
 				<div>
+					<div className="pointer" style={{position: 'absolute', top: 3, left: 10, zIndex: 2}}>
+						<span onClick={() => {
+							persistor.purge()
+							document.location.reload()
+						}}>log out</span>
+					</div>
 					<div style={styles.div}>
 						<span style={styles.headerText}>Coins: {this.props.authData.coins}</span>
 					</div>
