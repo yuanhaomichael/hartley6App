@@ -4,9 +4,47 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
 
+import {BACKEND_API_URI} from '../constants'
+
 export default class EventCard extends React.Component{
 	constructor(props){
 		super(props)
+		this.sendLike = this.sendLike.bind(this)
+		this.unlike = this.unlike.bind(this)
+	}
+
+	sendLike(){
+		fetch(encodeURI(BACKEND_API_URI + 'event/like'), {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+		      	'Content-Type': 'application/json',
+		      	'authToken': this.props.authData.token
+		     	 //'Content-Type':'application/x-www-form-urlencoded',
+		    },
+		    body: JSON.stringify({
+		    	event_id: this.props.ev.id
+		    })
+		})
+		.then((res) => res)
+		.catch((err) => err)
+	}
+
+	unlike(){
+		fetch(encodeURI(BACKEND_API_URI + 'event/like'), {
+			method: 'DELETE',
+			headers: {
+				Accept: 'application/json',
+		      	'Content-Type': 'application/json',
+		      	'authToken': this.props.authData.token
+		     	 //'Content-Type':'application/x-www-form-urlencoded',
+		    },
+		    body: JSON.stringify({
+		    	event_id: this.props.ev.id
+		    })
+		})
+		.then((res) => res)
+		.catch((err) => err)
 	}
 
 	render(){

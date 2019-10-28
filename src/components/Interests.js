@@ -11,31 +11,34 @@ export default class Interests extends React.Component{
 					Choose your interests
 				</div>
 				<div style={{display: 'flex', margin: 'auto', padding: 10}}>
-					<div className="subtleShadow pointer" style={styles.tag}>
-						Fun
-					</div>
-					<div className="subtleShadow pointer" style={styles.tag}>
-						Food
-					</div>
-					<div className="subtleShadow pointer" style={styles.tag}>
-						Ball Sport
-					</div>
-					<div className="subtleShadow pointer" style={styles.tag}>
-						Racket Sport
-					</div>					
+					<Interest content='Fun'/>
+					<Interest content='Food'/>
+					<Interest content='Ball Sport'/>
+					<Interest content='Racket Sport'/>					
 				</div>
 				<div style={{display: 'flex', margin: 'auto', padding: 10}}>
-					<div className="subtleShadow pointer" style={styles.tag}>
-						Intellectual
-					</div>
-					<div className="subtleShadow pointer" style={styles.tag}>
-						Holiday Event
-					</div>
-					<div className="subtleShadow pointer" style={styles.tag}>
-						Healthy Lifestyles
-					</div>				
+					<Interest content='Intellectual'/>
+					<Interest content='Holiday Event'/>
+					<Interest content='Healthy Lifestyle'/>				
 				</div>				
 			</div>
+		)
+	}
+}
+
+class Interest extends React.Component{
+	constructor(props){
+		super(props)
+		this.state = {
+			active: false,
+		}
+	}
+
+	render(){
+		return(
+			<div onClick={() => this.setState({active: !this.state.active})} className="subtleShadow pointer" style={this.state.active ?  {...styles.tag, backgroundColor: '#94CBEA'} : {...styles.tag, backgroundColor: 'white'}}>
+				{this.props.content}
+			</div>			
 		)
 	}
 }
@@ -56,7 +59,6 @@ const styles = {
 	},
 	tag: {
 		margin: 'auto',
-		backgroundColor: 'white',
 		borderRadius: 15,
 		paddingLeft: 20,
 		paddingRight: 20,

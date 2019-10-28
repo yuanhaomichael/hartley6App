@@ -30,7 +30,7 @@ export default class AllEvents extends React.Component{
 			      return(
 			        <React.Fragment>
 			          {label}
-			          <EventCard join={() => this.props.join(ev.id)} ev={ev} />
+			          <EventCard authData={this.props.auth} join={() => this.props.join(ev.id)} ev={ev} />
 			        </React.Fragment>
 			      )
 			    })}

@@ -104,14 +104,13 @@ class App extends React.Component {
 
 
   render(){
-    console.log(this.props.auth)
     return (
       <div className="App">
           {this.props.auth.authenticated && <Header authData={this.props.auth} events={(json) => this.setState({events: json})} />}
           {!this.props.auth.authenticated && <LoginCard authenticate={(email, password, phone) => this.props.login(email, password, phone)} />}
           <Interests />
           <InterestingEvents join={this.join} events={[]}/>
-          <AllEvents join={(id) => this.join(id)} events={this.state.events}/>
+          <AllEvents authData={this.props.auth} join={(id) => this.join(id)} events={this.state.events}/>
       </div>
     );
   }
