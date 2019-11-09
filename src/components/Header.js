@@ -1,5 +1,8 @@
 import React from 'react'
 import Modal from './Modal'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight, faTimes } from '@fortawesome/free-solid-svg-icons'
+
 import { persistor } from '../configureStore'
 
 import { BACKEND_API_URI }from '../constants'
@@ -24,6 +27,7 @@ class Header extends React.Component{
 
 
 	sendRequest(){
+		console.log('sent req')
     fetch(BACKEND_API_URI + 'event', {
       method: 'POST',
       mode: 'cors',
@@ -33,8 +37,8 @@ class Header extends React.Component{
           // 'Content-Type': 'application/x-www-form-urlencoded',
       },      
       body: JSON.stringify({
-              userId: this.props.authData.userId,
-              authToken: this.props.authData.token,
+        userId: this.props.authData.userId,
+        authToken: this.props.authData.token,
 				title: this.state.title,
 				category: this.state.category,
 				host: this.state.host,
@@ -50,7 +54,7 @@ class Header extends React.Component{
 					host: '',
 					time: '',
 					availability: 0,
-					button_text: 'Submit Event',
+					loadText: false,
 					modal_display: 'none',        	
         })
     	console.log(json)
@@ -71,7 +75,7 @@ class Header extends React.Component{
 			time: '',
 			availability: 0,
 			modal_display: 'none',
-			button_text: 'Submit Event',
+			loadText: false,
 		})
 	}	
 
@@ -81,18 +85,31 @@ class Header extends React.Component{
 				<Modal display={this.state.modal_display}>
 					<div style={styles.div}>
 						<h3 style={styles.formHead}>Have an Event Idea?</h3>
-						<span onClick={this.closeModal} style={styles.span}>close</span>
+						<span onClick={this.closeModal} style={styles.span}><FontAwesomeIcon icon={faTimes} size="lg"/></span>
 					</div>
-					<form style={styles.form}>
-						<input placeholder="What is the event?" onChange={(ev) => this.setState({title: ev.target.value})} value={this.state.title} />
-						<input placeholder="Who's hosting?" onChange={(ev) => this.setState({host: ev.target.value})} value={this.state.host} />
-						<input placeholder="When is it?" type="datetime-local" onChange={(ev) => this.setState({time: ev.target.value})} value={this.state.time} />
-						<input placeholder="What kind of event is it?" onChange={(ev) => this.setState({category: ev.target.value})} value={this.state.category} />
-						<input placeholder="How many people can come?" onChange={(ev) => this.setState({availability: ev.target.value})} value={this.state.availability}/>
-						<div onMouseDown={(ev) => this.setState({button_text: 'Creating Event...'})}  onMouseUp={this.sendRequest} style={styles.button}>
-							{this.state.button_text}
-						</div>
-					</form>
+					<div >
+						<form style={styles.form}>
+							<div>
+								<input placeholder="What is the event?" onChange={(ev) => this.setState({title: ev.target.value})} value={this.state.title} />
+								<input placeholder="Who's hosting?" onChange={(ev) => this.setState({host: ev.target.value})} value={this.state.host} />
+								<input placeholder="When is it?" type="datetime-local" onChange={(ev) => this.setState({time: ev.target.value})} value={this.state.time} />
+								<input placeholder="What kind of event is it?" onChange={(ev) => this.setState({category: ev.target.value})} value={this.state.category} />
+								<input placeholder="How many people can come?" onChange={(ev) => this.setState({availability: ev.target.value})}/>
+									{this.state.loadText ? 
+										<div style={{float: 'right', marginTop: 15}}>
+											<div className="loader"></div>
+										</div> 
+										:
+										<div onMouseDown={(ev) => {
+											this.setState({loadText: true})
+											this.sendRequest()
+										}} style={{...styles.button, float: 'right'}}>
+										 <FontAwesomeIcon icon={faArrowRight} />
+										</div>
+										}
+							</div>
+						</form>
+					</div>
 				</Modal>
 
 				<div>
@@ -144,13 +161,12 @@ const styles = {
   	padding: '20px',
   },
   button:{
-    width: '50vw',
+    width: '5vw',
     height: '4vh',
-    borderRadius: '10px',
+    borderRadius: '30px',
     backgroundColor: '#47b8e0',
     boxShadow: "0px 3px 15px rgba(0,0,0,0.2)",
     cursor: 'pointer',
-    margin: 'auto',
     color: 'white',
     fontWeight: 'bold',
     marginTop: '15px',

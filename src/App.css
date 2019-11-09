@@ -25,6 +25,19 @@ html, body{
 .pointer{
   cursor:pointer;
 }
+.loader {
+  border: 10px solid #f3f3f3; /* Light grey */
+  border-top: 10px solid #47b8e0; /* Blue */
+  border-radius: 50%;
+  width: 3vw;
+  height: 2vh;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 input{
 	border: 0;
 	border-bottom: 3px solid #B9D9EB;

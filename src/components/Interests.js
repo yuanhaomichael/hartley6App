@@ -1,30 +1,33 @@
 import React from 'react'
 import '../App.css';
 
-export default class Interests extends React.Component{
-
-
-	render(){
+export default function Interests(props){
+		const interests = [
+			'Fun',
+			'Fo'
+		]
 		return(
 			<div style={styles.container}>
 				<div className="subtleShadow" style={styles.header}>
 					Choose your interests
 				</div>
-				<div style={{display: 'flex', margin: 'auto', padding: 10}}>
-					<Interest content='Fun'/>
-					<Interest content='Food'/>
-					<Interest content='Ball Sport'/>
-					<Interest content='Racket Sport'/>					
-				</div>
-				<div style={{display: 'flex', margin: 'auto', padding: 10}}>
-					<Interest content='Intellectual'/>
-					<Interest content='Holiday Event'/>
-					<Interest content='Healthy Lifestyle'/>				
-				</div>				
+				<div style={{width: '500px', margin: 'auto'}}>
+					<div style={{display: 'flex', margin: 'auto', padding: 10}}>
+						<Interest updateInterests={() => props.updateInterests('Fun')} content='Fun'/>
+						<Interest updateInterests={() => props.updateInterests('Food')} content='Food'/>
+						<Interest updateInterests={() => props.updateInterests('Ball Sport')} content='Ball Sport'/>
+						<Interest updateInterests={() => props.updateInterests('Racket Sport')} content='Racket Sport'/>					
+					</div>
+					<div style={{display: 'flex', margin: 'auto', padding: 10}}>
+						<Interest updateInterests={() => props.updateInterests('Intellectual')} content='Intellectual'/>
+						<Interest updateInterests={() => props.updateInterests('Holiday Event')} content='Holiday Event'/>
+						<Interest updateInterests={() => props.updateInterests('Healthy Lifestyle')} content='Healthy Lifestyle'/>				
+					</div>	
+				</div>			
 			</div>
-		)
-	}
-}
+		)	
+} 
+
 
 class Interest extends React.Component{
 	constructor(props){
@@ -36,7 +39,10 @@ class Interest extends React.Component{
 
 	render(){
 		return(
-			<div onClick={() => this.setState({active: !this.state.active})} className="subtleShadow pointer" style={this.state.active ?  {...styles.tag, backgroundColor: '#94CBEA'} : {...styles.tag, backgroundColor: 'white'}}>
+			<div onClick={() => {
+					this.props.updateInterests()
+					this.setState({active: !this.state.active})}
+				} className="subtleShadow pointer" style={this.state.active ?  {...styles.tag, backgroundColor: '#94CBEA'} : {...styles.tag, backgroundColor: 'white'}}>
 				{this.props.content}
 			</div>			
 		)

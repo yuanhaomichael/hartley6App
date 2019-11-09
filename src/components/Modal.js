@@ -36,7 +36,9 @@ const styles = {
 		margin: 'auto',
 		backgroundColor: 'white',
 		borderRadius: '15px',
-		top: '10',
+		top: 10,
+		height: '60vh',
+		position: 'relative'
 	}
 }
 

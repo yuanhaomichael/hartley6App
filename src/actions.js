@@ -33,6 +33,35 @@ export function logInFunc(email, password, phone = null){
 	}
 }
 
+export function getEventsFunc(){
+	return (dispatch) => {
+		dispatch(getAuth());
+		fetch(encodeURI(BACKEND_API_URI + 'login'),
+		{
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+		      	'Content-Type': 'application/json',
+		     	 //'Content-Type':'application/x-www-form-urlencoded',
+		    },
+		body: JSON.stringify({
+		}),
+		})
+		.then((res) => {
+			console.log(res)
+			return res.json()
+		})
+		.then(json => {
+			console.log(json)
+			dispatch(getAuthSuccess(json))
+		})
+		.catch(err => {
+			console.log(err)
+			dispatch(getAuthFailure(err))
+		})
+	}
+}
+
 // Action Creators
 // Auth
 function getAuth(){

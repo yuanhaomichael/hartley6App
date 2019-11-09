@@ -4,3 +4,6 @@ export const LOG_IN = "LOG_IN"
 export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS"
 export const LOG_IN_FAILURE = "LOG_IN_FAILURE"
 
+export const GET_EVENTS = "GET_EVENTS"
+export const GET_EVENTS_SUCCESS = "GET_EVENTS_SUCCESS"
+export const GET_EVENTS_FAILURE = "GET_EVENTS_FAILURE"

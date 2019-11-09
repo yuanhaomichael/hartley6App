@@ -19,18 +19,31 @@ export default class AllEvents extends React.Component{
 				</div>
 				<div style={styles.events}>
 			    {this.props.events.map((ev, i)=>{
-			     let today = new Date().getTime()
-			        let curr_ev_time = new Date(ev.time.replace(ev.time.substring(ev.time.indexOf('T'), ev.time.length), "")).getTime()
-			        let prev_ev_time = (this.props.events[i-1] ? new Date(this.props.events[i-1].time.replace(this.props.events[i-1].time.substring(this.props.events[i-1].time.indexOf('T'), this.props.events[i-1].time.length), "")).getTime() : 0)
-			        let diff_time = (curr_ev_time != prev_ev_time || prev_ev_time == 0 ? true : false)
-			        let date = new Date(curr_ev_time)
-			        let label = (!diff_time ? null : <div className="subtleShadow" style={{width: '35vw', backgroundColor: 'white', borderRadius: 12, margin: 12, padding: 10}}><b>{
-			            (date.getUTCMonth() + 1).toString() + "/" + (date.getUTCDate()).toString() + "/" + (date.getUTCFullYear()).toString() + " " + (curr_ev_time == today ? "TODAY" : "")
-			          }</b></div>)            
+			      let today = new Date().getTime()
+		        let curr_ev_time = new Date(ev.time.replace(ev.time.substring(ev.time.indexOf('T'), ev.time.length), "")).getTime()
+		        let prev_ev_time = (this.props.events[i-1] ? new Date(this.props.events[i-1].time.replace(this.props.events[i-1].time.substring(this.props.events[i-1].time.indexOf('T'), this.props.events[i-1].time.length), "")).getTime() : 0)
+		        let label = (() => {if (today > curr_ev_time){
+		        		        								return (
+																					<div className="subtleShadow" style={{width: '35vw', backgroundColor: 'white', borderRadius: 12, margin: 12, padding: 10}}><b>Today</b></div>		        		        								
+		        		        								)
+		        		        		        } else if (curr_ev_time > today && 604800000 > (curr_ev_time-today)) {
+			        		        							return (
+																					<div className="subtleShadow" style={{width: '35vw', backgroundColor: 'white', borderRadius: 12, margin: 12, padding: 10}}><b>This Week</b></div>		        		        								
+		        		        								)	        		        								
+		        		        						} else {
+		       		        		        			return (
+																					<div className="subtleShadow" style={{width: '35vw', backgroundColor: 'white', borderRadius: 12, margin: 12, padding: 10}}><b>To Come</b></div>		        		        								
+		        		        								) 		        							
+		        		        						}
+		        		        				})()
+		        /*(today > curr_ev_time ? <div className="subtleShadow" style={{width: '35vw', backgroundColor: 'white', borderRadius: 12, margin: 12, padding: 10}}><b>Today</b></div> : <div className="subtleShadow" style={{width: '35vw', backgroundColor: 'white', borderRadius: 12, margin: 12, padding: 10}}><b>{
+		            (date.getUTCMonth() + 1).toString() + "/" + (date.getUTCDate()).toString() + "/" + (date.getUTCFullYear()).toString() + " " + (curr_ev_time == today ? "TODAY" : "")
+		          }</b></div>)*/            
 			      return(
-			        <React.Fragment>
-			          {label}
-			          <EventCard authData={this.props.auth} join={() => this.props.join(ev.id)} ev={ev} />
+			        <React.Fragment key={i}>
+			          {((today > curr_ev_time) || (prev_ev_time < today && curr_ev_time > today) || (604800000<(curr_ev_time-today)) ? 
+			          	label : null)}
+			          <EventCard authData={this.props.authData} join={() => this.props.join(ev.id)} ev={ev} />
 			        </React.Fragment>
 			      )
 			    })}
