@@ -21,7 +21,8 @@ export default class EventCard extends React.Component{
 	}
 
 	componentDidMount(){
-		//Get likes
+		if (this.props.authData.token.length > 0){		
+	//Get likes
 		fetch(encodeURI(BACKEND_API_URI + 'event/event_like'), {
 			method: 'POST',
 			headers: {
@@ -62,7 +63,7 @@ export default class EventCard extends React.Component{
 				members: json['events']
 			})
 		})
-		.catch((err) => console.log(err))
+		.catch((err) => console.log(err))}
 	}
 
 	sendLike(){
