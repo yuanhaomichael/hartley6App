@@ -23,8 +23,7 @@ class App extends React.Component {
     this.join = this.join.bind(this)
     this.updateInterests = this.updateInterests.bind(this)
   }
-
-
+  
 
   componentDidMount(){
     getEvents(this.state)

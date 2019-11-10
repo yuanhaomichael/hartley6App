@@ -1,8 +1,9 @@
 import React from 'react'
 import '../App.css';
+import Modal from './Modal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
-import { faUserPlus, faShare, faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons'
+import { faUserPlus, faShare, faTimes, faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons'
 
 import {BACKEND_API_URI} from '../constants'
 
@@ -11,13 +12,16 @@ export default class EventCard extends React.Component{
 		super(props)
 		this.state = {
 			likes: false,
-			likesCount: null
+			likesCount: null,
+			modal_display: 'none',
+			members: []
 		}
 		this.sendLike = this.sendLike.bind(this)
 		this.sendUnlike = this.sendUnlike.bind(this)
 	}
 
 	componentDidMount(){
+		//Get likes
 		fetch(encodeURI(BACKEND_API_URI + 'event/event_like'), {
 			method: 'POST',
 			headers: {
@@ -36,6 +40,26 @@ export default class EventCard extends React.Component{
 			this.setState({
 				likes: true,
 				likesCount: json.events.length
+			})
+		})
+		.catch((err) => console.log(err))
+
+		//Get Members
+		fetch(encodeURI(BACKEND_API_URI + 'event/group'),{
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				'authToken': this.props.authData.token
+			},
+			body: JSON.stringify({
+				event_id: this.props.ev.id
+			})
+		})
+		.then((res) => res.json())
+		.then((json) => {
+			this.setState({
+				members: json['events']
 			})
 		})
 		.catch((err) => console.log(err))
@@ -90,6 +114,17 @@ export default class EventCard extends React.Component{
 	render(){
 		return(
 			<div className="subtleShadow" style={styles.card}>
+				<Modal display={this.state.modal_display}>
+					<div>
+						<FontAwesomeIcon style={{color: 'red', cursor: 'pointer', float: 'right', padding: 20}} onClick={() => this.setState({modal_display: 'none'})} icon={faTimes} />
+					</div>
+					<h4 style={{padding: 15}}>See Which One of Your Friends are Going:</h4>
+					{this.state.members.map((member, i) => {
+						return(
+							<div>{member.first_name + " " + member.last_name}</div>
+						)
+					})}
+				</Modal>
 				<div style={styles.body}>
 					<div style={styles.left}>
 						<div style={{...styles.line, color: 'grey', fontWeight: 'bold'}}>
@@ -99,10 +134,10 @@ export default class EventCard extends React.Component{
 							{this.props.ev.title}
 						</div>
 						<div style={styles.line}>
-							{parseDate(this.props.ev.time)}
+							{parseDate(this.props.ev.time)} {this.props.ev.time.replace(this.props.ev.time.substring(this.props.ev.time.indexOf('T'), this.props.ev.time.length), "").replace('T', '@').replace('2019-', '')}
 						</div>
 						<div style={{...styles.line, position: 'absolute', bottom: 35,}}>
-							<span style={{textDecoration: 'underline', cursor: 'pointer'}}>See who's going</span> | {this.props.ev.availability} spots left
+							<span onClick={() => this.setState({modal_display: 'block'})} style={{textDecoration: 'underline', cursor: 'pointer'}}>See who's going</span> | {this.props.ev.availability} spots left
 						</div>
 					</div>
 					<div style={styles.right}>
@@ -139,7 +174,7 @@ function parseDate(date){
 
 const styles = {
 	card: {
-		width: '95vw',
+		width: '95%',
 		height: '30vh',
 		backgroundColor: 'white',
 		borderRadius: 12,

@@ -30,7 +30,7 @@ const styles = {
 		right: 0,
 		left: 0,
 		position: 'fixed',
-		zIndex: 3,
+		zIndex: 10,
 	},
 	modal:{
 		margin: 'auto',

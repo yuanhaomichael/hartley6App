@@ -15,7 +15,7 @@ class Header extends React.Component{
 			category: '',
 			host: '',
 			time: '',
-			availability: 0,
+			availability: '',
 			button_text: 'Submit Event',
 			modal_display: 'none'
 		}
@@ -25,9 +25,7 @@ class Header extends React.Component{
 	}
 
 
-
 	sendRequest(){
-		console.log('sent req')
     fetch(BACKEND_API_URI + 'event', {
       method: 'POST',
       mode: 'cors',
@@ -46,7 +44,10 @@ class Header extends React.Component{
 				availability: this.state.availability,
             }),
     })
-    .then((res) => res.json())
+    .then((res) => {
+    	console.log(res)
+    	return res.json()
+    })
     .then((json) => {
     	this.setState({
 					title: '',
@@ -57,10 +58,10 @@ class Header extends React.Component{
 					loadText: false,
 					modal_display: 'none',        	
         })
-    	console.log(json)
+    	console.log('json')
     	this.props.events(json.events)
     })
-    .catch((err) => alert('Failed to create event. ERROR: ' + err))	
+    .catch((err) => alert('FAILED: ' + err))	
 	}	
 	openModal(){
 		this.setState({
@@ -93,7 +94,7 @@ class Header extends React.Component{
 								<input placeholder="What is the event?" onChange={(ev) => this.setState({title: ev.target.value})} value={this.state.title} />
 								<input placeholder="Who's hosting?" onChange={(ev) => this.setState({host: ev.target.value})} value={this.state.host} />
 								<input placeholder="When is it?" type="datetime-local" onChange={(ev) => this.setState({time: ev.target.value})} value={this.state.time} />
-								<input placeholder="What kind of event is it?" onChange={(ev) => this.setState({category: ev.target.value})} value={this.state.category} />
+								<input placeholder="Add tags (seperated by a comma)" onChange={(ev) => this.setState({category: ev.target.value})} value={this.state.category} />
 								<input placeholder="How many people can come?" onChange={(ev) => this.setState({availability: ev.target.value})}/>
 									{this.state.loadText ? 
 										<div style={{float: 'right', marginTop: 15}}>
@@ -145,7 +146,7 @@ const styles = {
 		backgroundColor: 'white',
 		height: '45px',
     boxShadow: "0px 3px 15px rgba(0,0,0,0.2)",
-    zIndex: 20
+    zIndex: 8
 	},
 	div: {
 		display: 'inline-block',

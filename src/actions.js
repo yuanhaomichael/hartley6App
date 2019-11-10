@@ -19,15 +19,12 @@ export function logInFunc(email, password, phone = null){
 		}),
 		})
 		.then((res) => {
-			console.log(res)
 			return res.json()
 		})
 		.then(json => {
-			console.log(json)
 			dispatch(getAuthSuccess(json))
 		})
 		.catch(err => {
-			console.log(err)
 			dispatch(getAuthFailure(err))
 		})
 	}
@@ -48,15 +45,12 @@ export function getEventsFunc(){
 		}),
 		})
 		.then((res) => {
-			console.log(res)
 			return res.json()
 		})
 		.then(json => {
-			console.log(json)
 			dispatch(getAuthSuccess(json))
 		})
 		.catch(err => {
-			console.log(err)
 			dispatch(getAuthFailure(err))
 		})
 	}
