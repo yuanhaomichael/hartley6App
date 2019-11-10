@@ -11,7 +11,7 @@ export default function Interests(props){
 				<div className="subtleShadow" style={styles.header}>
 					Choose your interests
 				</div>
-				<div style={{width: '500px', margin: 'auto'}}>
+				<div style={{width: '95%', margin: 'auto'}}>
 					<div style={{display: 'flex', margin: 'auto', padding: 10}}>
 						<Interest updateInterests={() => props.updateInterests('Fun')} content='Fun'/>
 						<Interest updateInterests={() => props.updateInterests('Food')} content='Food'/>
