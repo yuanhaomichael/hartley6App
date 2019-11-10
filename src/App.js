@@ -144,8 +144,8 @@ function getEvents(authData, tags = []){
     method: 'POST',
     mode: 'cors',
     headers: {
-        'Content-Type': 'application/json',
-        'authToken': authData.authToken,
+    'Content-Type': 'application/json',
+    'authToken': authData.authToken,
         // 'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: JSON.stringify({
