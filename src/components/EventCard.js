@@ -13,7 +13,8 @@ export default class EventCard extends React.Component{
 		this.state = {
 			likes: false,
 			likesCount: null,
-			modal_display: 'none',
+			groupModal: 'none',
+			shareModal: 'none',
 			members: []
 		}
 		this.sendLike = this.sendLike.bind(this)
@@ -115,16 +116,20 @@ export default class EventCard extends React.Component{
 	render(){
 		return(
 			<div className="subtleShadow" style={styles.card}>
-				<Modal display={this.state.modal_display}>
+				<Modal display={this.state.groupModal} headerLabel={'People Attending'}>
 					<div>
-						<FontAwesomeIcon style={{color: 'red', cursor: 'pointer', float: 'right', padding: 20}} onClick={() => this.setState({modal_display: 'none'})} icon={faTimes} />
+						<FontAwesomeIcon style={{color: 'red', cursor: 'pointer', float: 'right', padding: 20}} onClick={() => this.setState({groupModal: 'none'})} icon={faTimes} />
 					</div>
-					<h4 style={{padding: 15}}>See Which One of Your Friends are Going:</h4>
 					{this.state.members.map((member, i) => {
 						return(
-							<div>{member.first_name + " " + member.last_name}</div>
+							<div key={member + "-" + i}>{member.first_name + " " + member.last_name}</div>
 						)
 					})}
+				</Modal>
+				<Modal display={this.state.shareModal}>
+					<div>
+						<FontAwesomeIcon style={{color: 'red', cursor: 'pointer', float: 'right', padding: 20}} onClick={() => this.setState({shareModal: 'none'})} icon={faTimes} />
+					</div>				
 				</Modal>
 				<div style={styles.body}>
 					<div style={styles.left}>
@@ -138,7 +143,7 @@ export default class EventCard extends React.Component{
 							{parseDate(this.props.ev.time)} {this.props.ev.time.replace(this.props.ev.time.substring(this.props.ev.time.indexOf('T'), this.props.ev.time.length), "").replace('T', '@').replace('2019-', '')}
 						</div>
 						<div style={{...styles.line, position: 'absolute', bottom: 35,}}>
-							<span onClick={() => this.setState({modal_display: 'block'})} style={{textDecoration: 'underline', cursor: 'pointer'}}>See who's going</span> | {this.props.ev.availability} spots left
+							<span onClick={() => this.setState({groupModal: 'block'})} style={{textDecoration: 'underline', cursor: 'pointer'}}>See who's going</span> | {this.props.ev.availability} spots left
 						</div>
 					</div>
 					<div style={styles.right}>
@@ -156,7 +161,7 @@ export default class EventCard extends React.Component{
 								<span style={styles.likes}>{this.state.likesCount}</span>
 							</div>
 							<div style={styles.icon} className="pointer">
-								<FontAwesomeIcon icon={faShare} size="lg"/>
+								<FontAwesomeIcon onClick={() => this.setState({shareModal: 'block'})} icon={faShare} size="lg"/>
 							</div>
 						</div>
 					</div>						

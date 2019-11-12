@@ -20,9 +20,26 @@ export default function Interests(props){
 					</div>
 					<div style={{display: 'flex', margin: 'auto', padding: 10}}>
 						<Interest updateInterests={() => props.updateInterests('Intellectual')} content='Intellectual'/>
-						<Interest updateInterests={() => props.updateInterests('Holiday Event')} content='Holiday Event'/>
+						<Interest updateInterests={() => props.updateInterests('Modern Music')} content='Modern Music'/>
 						<Interest updateInterests={() => props.updateInterests('Healthy Lifestyle')} content='Healthy Lifestyle'/>				
+					</div>
+					<div style={{display: 'flex', margin: 'auto', padding: 10}}>
+						<Interest updateInterests={() => props.updateInterests('Dessert')} content='Dessert'/>
+						<Interest updateInterests={() => props.updateInterests('Chess')} content='Chess'/>
+						<Interest updateInterests={() => props.updateInterests('Holiday Event')} content='Holiday Event'/>
+						<Interest updateInterests={() => props.updateInterests('Social Justice')} content='Social Justice'/>					
 					</div>	
+					<div style={{display: 'flex', margin: 'auto', padding: 10}}>
+						<Interest updateInterests={() => props.updateInterests('Western Food')} content='Western Food'/>
+						<Interest updateInterests={() => props.updateInterests('NYC Event')} content='NYC Event'/>
+						<Interest updateInterests={() => props.updateInterests('Excursion')} content='Excursion'/>				
+					</div>
+					<div style={{display: 'flex', margin: 'auto', padding: 10}}>
+						<Interest updateInterests={() => props.updateInterests('Movie')} content='Movie'/>
+						<Interest updateInterests={() => props.updateInterests('Games')} content='Games'/>
+						<Interest updateInterests={() => props.updateInterests('Multicultural')} content='Multicultural'/>
+						<Interest updateInterests={() => props.updateInterests('Campus Event')} content='Campus Event'/>					
+					</div>															
 				</div>			
 			</div>
 		)	
@@ -66,9 +83,10 @@ const styles = {
 	tag: {
 		margin: 'auto',
 		borderRadius: 15,
-		paddingLeft: 20,
-		paddingRight: 20,
-		paddingTop: 10,
-		paddingBottom: 10,
+		paddingLeft: 10,
+		paddingRight: 10,
+		paddingTop: 5,
+		paddingBottom: 5,
+		fontSize: 17
 	}
 }

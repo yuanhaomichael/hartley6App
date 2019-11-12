@@ -14,14 +14,18 @@ class Header extends React.Component{
 			title:'',
 			category: '',
 			host: '',
+			where: '',
 			time: '',
 			availability: '',
+			tags: [],
 			button_text: 'Submit Event',
 			modal_display: 'none'
 		}
 		this.openModal = this.openModal.bind(this)
 		this.closeModal = this.closeModal.bind(this)
 		this.sendRequest = this.sendRequest.bind(this)
+		this.addTag = this.addTag.bind(this)
+		this.removeTag = this.removeTag.bind(this)
 	}
 
 
@@ -40,9 +44,11 @@ class Header extends React.Component{
 				title: this.state.title,
 				category: this.state.category,
 				host: this.state.host,
+				where: this.state.where,
+				tags: this.state.tags,
 				time: this.state.time,
 				availability: this.state.availability,
-            }),
+       }),
     })
     .then((res) => {
     	console.log(res)
@@ -52,8 +58,10 @@ class Header extends React.Component{
     	this.setState({
 					title: '',
 					category: '',
+					where: '',
 					host: '',
 					time: '',
+					tag: [],
 					availability: 0,
 					loadText: false,
 					modal_display: 'none',        	
@@ -73,29 +81,69 @@ class Header extends React.Component{
 			title:'',
 			category: '',
 			host: '',
+			where: '',
 			time: '',
+			tags: [],
 			availability: 0,
 			modal_display: 'none',
 			loadText: false,
 		})
 	}	
 
+	addTag(ev){
+		if (ev.key === 'Enter'){
+			if (!this.state.tags.includes(this.state.category)){
+				this.setState({
+					tags: [...this.state.tags, this.state.category],
+					category: ''
+				})
+			}else{
+				this.setState({category: ''})
+			}
+		}
+	}
+
+	removeTag(rmTag){
+		this.setState({
+			tags: [...this.state.tags.filter((tag) => tag != rmTag)]
+		})
+	}
+
 	render(){
 		return(
 			<div style={styles.main}>
-				<Modal display={this.state.modal_display}>
+				<Modal display={this.state.modal_display} headerLabel={'New Event'}>
 					<div style={styles.div}>
-						<h3 style={styles.formHead}>Have an Event Idea?</h3>
 						<span onClick={this.closeModal} style={styles.span}><FontAwesomeIcon icon={faTimes} size="lg"/></span>
 					</div>
-					<div >
+					<div style={{height: '100%', marginTop: 20}} >
 						<form style={styles.form}>
-							<div>
-								<input placeholder="What is the event?" onChange={(ev) => this.setState({title: ev.target.value})} value={this.state.title} />
-								<input placeholder="Who's hosting?" onChange={(ev) => this.setState({host: ev.target.value})} value={this.state.host} />
-								<input placeholder="When is it?" type="datetime-local" onChange={(ev) => this.setState({time: ev.target.value})} value={this.state.time} />
-								<input placeholder="Add tags (seperated by a comma)" onChange={(ev) => this.setState({category: ev.target.value})} value={this.state.category} />
-								<input placeholder="How many people can come?" onChange={(ev) => this.setState({availability: ev.target.value})}/>
+							<div style={{height: '100%'}} >
+								<div style={{marginBottom: 10}}>
+									<input placeholder="Event Name" onChange={(ev) => this.setState({title: ev.target.value})} value={this.state.title} />
+								</div>
+								<div style={{display: 'flex', marginBottom: 10}}>
+									<input style={{width: '60%'}} placeholder="Hosted by" onChange={(ev) => this.setState({host: ev.target.value})} value={this.state.host} />
+									<input style={{width: '35%', marginLeft: "5%"}} placeholder="Attendance" onChange={(ev) => this.setState({availability: ev.target.value})}/>
+								</div>
+								<div style={{marginBottom: 10}}>
+									<input placeholder="When is it?" type="datetime-local" onChange={(ev) => this.setState({time: ev.target.value})} value={this.state.time} />
+								</div>
+								<div style={{marginBottom: 10}}>
+									<input placeholder="Location" onChange={(ev) => this.setState({where: ev.target.value})} value={this.state.where} />
+								</div>								
+								<div style={{marginBottom: 10, display: 'flex'}}>
+									{this.state.tags.map((tag,i) => {
+										return(
+											<div key={tag + "-" + i} style={styles.tag}>
+												{tag}
+												<FontAwesomeIcon onClick={() => this.removeTag(tag)} icon={faTimes} style={{padding: 3, cursor: 'pointer'}}/>
+											</div>
+										)
+									})}
+
+									<input placeholder="Add tags [ENTER to Add]" onKeyPress={(ev) => this.addTag(ev)} onChange={(ev) => this.setState({category: ev.target.value})} value={this.state.category} />
+								</div>
 									{this.state.loadText ? 
 										<div style={{float: 'right', marginTop: 15}}>
 											<div className="loader"></div>
@@ -154,9 +202,9 @@ const styles = {
 		width: '33%'
 	},
   form:{
-  	width: '80%',
+  	width: '90%',
   	margin: 'auto',
-  	paddingBottom: '20px',
+  	height: '100%'
   },
   formHead:{
   	padding: '20px',
@@ -192,8 +240,14 @@ const styles = {
   headerText: {
    	position: 'absolute',
   	top: 15,
+  },
+  tag: {
+  	backgroundColor: '#47b8e0',
+  	color: 'white',
+  	padding: 10,
+  	borderRadius: 10,
+  	display: 'flex'
   }
-
 }
 
 export default Header
