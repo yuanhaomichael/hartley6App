@@ -17,7 +17,7 @@ html, body{
   z-index: 30;
 }
 .subtleShadow{
-  box-shadow: 0px 3px 15px rgba(0,0,0,0.2)
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2) /*ggg*/
 }
 .hide-col{
   display: block
