@@ -1,0 +1,94 @@
+html, body{
+  width: 100%;
+  font-family: avenir;
+}
+.App {
+  text-align: center;
+  width: 100%;
+}
+.main{
+  width: 90%
+}
+.main-lg{
+  width: 60%
+}
+.modal{
+  width: 50%;
+  z-index: 30;
+}
+.subtleShadow{
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2)
+}
+.hide-col{
+  display: block
+}
+.pointer{
+  cursor:pointer;
+}
+.loader {
+  border: 10px solid #f3f3f3; 
+  border-top: 10px solid #47b8e0; 
+  border-radius: 50%;
+  width: 3vw;
+  height: 2vh;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+input{
+	border: 0;
+	border-bottom: 3px solid #B9D9EB;
+	width: 100%;
+	font-size: 27px;
+}
+input:focus{
+	outline: none;
+}
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+//Preset Keyframes
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .main{
+    width: 100%;
+  }
+  .main-lg{
+    width: 100%
+  }
+  .modal{
+    width: 90%
+  }
+  .hide-col{
+    display: none
+  }
+  .newEventBtn{
+    right: 10;
+    top: 3;
+    position: absolute;
+    font-weight: bold;
+    font-size: 50px;
+    cursor: pointer;
+  }
+  .table-text{
+    font-size: 10px;
+  }
+}
