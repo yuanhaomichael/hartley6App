@@ -37,8 +37,8 @@ class App extends React.Component {
   }
 
   updateInterests(interest){
-    if ( this.state.interests.includes(interest) ){
-     this.setState({interests: [...this.state.interests.filter(item => item !== interest)]},
+    if ( this.state.interests.includes(interest.toUpperCase()) ){
+     this.setState({interests: [...this.state.interests.filter(item => item !== interest.toUpperCase())]},
        () => getEvents(this.props.auth, this.state.interests)
         .then((res) => res.json())
         .then((json) => {
@@ -55,7 +55,7 @@ class App extends React.Component {
         })       
        )
     }else{
-     this.setState({interests: [...this.state.interests, interest]},
+     this.setState({interests: [...this.state.interests, interest.toUpperCase()]},
        () => getEvents(this.props.auth, this.state.interests)
         .then((res) => res.json())
         .then((json) => {
@@ -129,9 +129,8 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        {this.props.auth.authenticated && <Header authData={this.props.auth} events={(json) => {
-          this.setState({events: json})}} />}
-        {!this.props.auth.authenticated && <LoginCard authenticate={(email, password, phone) => this.props.login(email, password, phone)} />}
+        {this.props.auth.authenticated && <Header authData={this.props.auth} events={(json) => this.setState({events: json})} />}
+        {!this.props.auth.authenticated && <LoginCard authenticate={(email, password, phone) => this.props.login(email, password, phone)} />}              
         <Interests updateInterests={(interest) => this.updateInterests(interest)} />
         <InterestingEvents authData={this.props.auth} join={this.join} events={this.state.interestedEvents}/>
         <AllEvents authData={this.props.auth} join={(id) => this.join(id)} events={this.state.events}/>

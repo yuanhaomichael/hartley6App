@@ -9,9 +9,7 @@ html, body{
 .main{
   width: 90%
 }
-.main-lg{
-  width: 60%
-}
+
 .modal{
   width: 50%;
   z-index: 30;
@@ -42,7 +40,7 @@ input{
 	border: 0;
 	border-bottom: 3px solid #B9D9EB;
 	width: 100%;
-	font-size: 27px;
+	font-size: 20px;
 }
 input:focus{
 	outline: none;

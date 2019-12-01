@@ -4,7 +4,6 @@ import '../App.css';
 export default function Interests(props){
 		const interests = [
 			'Fun',
-			'Fo'
 		]
 		return(
 			<div style={styles.container}>

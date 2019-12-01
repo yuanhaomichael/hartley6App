@@ -211,7 +211,7 @@ const styles = {
   },
   button:{
     width: '5vw',
-    height: '4vh',
+    height: '2vh',
     borderRadius: '30px',
     backgroundColor: '#47b8e0',
     boxShadow: "0px 3px 15px rgba(0,0,0,0.2)",

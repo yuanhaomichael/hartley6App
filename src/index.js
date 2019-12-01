@@ -6,16 +6,36 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { persistor, store } from './configureStore'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  withRouter
+} from "react-router-dom";
 
 const ReduxWrapper = () => {
 	return (
 		<Provider store={store}>
 			<PersistGate loading={null} persistor={persistor}>
-				<App />
+        <Router>
+          <Switch>
+            <Route path="/">
+							<App />
+            </Route>
+            <Route path="/terms">
+              <div>
+                terms
+              </div>
+            </Route>
+          </Switch>
+        </Router>		
 			</PersistGate>
-		</Provider>
+		</Provider>       
 		)
 }
+
+withRouter(ReduxWrapper)
 
 ReactDOM.render(<ReduxWrapper />, document.getElementById('root'));
 
