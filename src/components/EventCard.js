@@ -140,10 +140,10 @@ export default class EventCard extends React.Component{
 							{this.props.ev.title}
 						</div>
 						<div style={styles.line}>
-							{parseDate(this.props.ev.time)} {this.props.ev.time.replace(this.props.ev.time.substring(this.props.ev.time.indexOf('T'), this.props.ev.time.length), "").replace('T', '@').replace('2019-', '')}
+							{getDay(this.props.ev.time)}, {this.props.ev.time.replace(this.props.ev.time.substring(this.props.ev.time.indexOf('T'), this.props.ev.time.length), "").replace('T', '@').replace('2019-', '').replace('-', '/')} at {parseDate(this.props.ev.time)} 
 						</div>
 						<div style={{...styles.line, position: 'absolute', bottom: 39,}}>
-							<span onClick={() => this.setState({groupModal: 'block'})} style={{textDecoration: 'underline', cursor: 'pointer'}}>See who's going</span> | {this.props.ev.availability} spots left
+							<span onClick={() => this.setState({groupModal: 'block'})} style={{textDecoration: 'underline', cursor: 'pointer'}}>See who's going</span> &nbsp;| {this.props.ev.availability} spots left
 						</div>
 					</div>
 					<div style={styles.right}>
@@ -170,12 +170,33 @@ export default class EventCard extends React.Component{
 		)
 	}
 }
-
+function getDay(date){
+	let d = new Date(date)
+	let day = (() =>{
+		switch(d.getDay()){
+			case 0:
+				return 'Sunday' 
+			case 1:
+				return 'Monday'
+			case 2:
+				return 'Tuesday' 
+			case 3:
+				return 'Wednesday' 
+			case 4:
+				return 'Thursday' 
+			case 5:
+				return 'Friday'
+			case 6:
+				return 'Saturday' 				 																
+		}
+	})()
+	return day
+}
 function parseDate(date){
 	let v1 = date.replace('T', '@').replace('2019-', '')
 	let milTime = v1.split(':', 2).join(':').replace(v1.split(':', 2).join(':').substring(0,v1.split(':', 2).join(':').indexOf('@') + 1), "")
-	console.log(milTime)
-	let time = (parseInt(milTime.split(':')[0]) > 12 ? milTime.replace(milTime.substring(0,2), parseInt(milTime.split(':')[0]) - 12) + " PM" : milTime.replace(milTime.substring(0,2), parseInt(milTime.split(':')[0])) + " AM")
+	let time = (parseInt(milTime.split(':')[0]) >= 12 ? milTime.replace(milTime.substring(0,2), parseInt(milTime.split(':')[0]) - 12) + " PM" : milTime.replace(milTime.substring(0,2), parseInt(milTime.split(':')[0])) + " AM")
+	time = (time[0] == 0 ? time.replace(time.substring(0,1), '12') : time)
 	return time
 }
 

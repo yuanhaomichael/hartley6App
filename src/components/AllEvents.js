@@ -19,7 +19,7 @@ export default class AllEvents extends React.Component{
 				</div>
 				<div style={styles.events}>
 			    {this.props.events.map((ev, i)=>{
-			      let today = new Date().getTime()
+			    let today = new Date().getTime()
 		        let curr_ev_time = new Date(ev.time.replace(ev.time.substring(ev.time.indexOf('T'), ev.time.length), "")).getTime()
 		        let prev_ev_time = (this.props.events[i-1] ? new Date(this.props.events[i-1].time.replace(this.props.events[i-1].time.substring(this.props.events[i-1].time.indexOf('T'), this.props.events[i-1].time.length), "")).getTime() : 0)
 		        let label = (() => {if (today > curr_ev_time){

@@ -14,7 +14,7 @@ class Modal extends React.Component{
 			<div style={{display: this.props.display}}>
 				<div style={styles.overlay}>
 					<div className='subtleShadow' style={{backgroundColor: 'white', position: 'relative', top: 5, height: '7vh', width: '30vh', borderRadius: '15px', margin: 'auto', overflow: 'hidden', marginTop: 15, fontWeight: 'bold'}}>
-						{this.props.headerLabel}
+						<h2>{this.props.headerLabel}</h2>
 					</div>
 					<div className='modal' style={styles.modal}>
 						{this.props.children}
