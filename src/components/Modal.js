@@ -40,7 +40,7 @@ const styles = {
 		backgroundColor: 'white',
 		borderRadius: '15px',
 		top: 10,
-		height: '60vh',
+		height: '40vh',
 		position: 'relative'
 	}
 }

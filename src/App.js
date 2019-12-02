@@ -96,7 +96,7 @@ class App extends React.Component {
         events: [...json['events']],       
       })
     })
-    .catch((err) => alert('Failed to join event. ERROR: ') + err)
+    .catch((err) => alert('Failed to join event.'))
   }
 
   trash(id){
@@ -132,7 +132,7 @@ class App extends React.Component {
         {this.props.auth.authenticated && <Header authData={this.props.auth} events={(json) => this.setState({events: json})} />}
         {!this.props.auth.authenticated && <LoginCard authenticate={(email, password, phone) => this.props.login(email, password, phone)} />}              
         <Interests updateInterests={(interest) => this.updateInterests(interest)} />
-        <InterestingEvents authData={this.props.auth} join={this.join} events={this.state.interestedEvents}/>
+        <InterestingEvents authData={this.props.auth} join={(id) => this.join(id)} events={this.state.interestedEvents}/>
         <AllEvents authData={this.props.auth} join={(id) => this.join(id)} events={this.state.events}/>
       </div>
     );
@@ -160,7 +160,7 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
   return {
-    login: (email, password) => dispatch(logInFunc(email, password)),
+    login: (email, password, phone) => dispatch(logInFunc(email, password, phone)),
   }
 }
 

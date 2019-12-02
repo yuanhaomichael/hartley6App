@@ -1,5 +1,7 @@
 import React from 'react'
-import '../App.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons'
+
 
 import { BACKEND_API_URI }from '../constants'
 
@@ -7,36 +9,40 @@ class Login extends React.Component{
 	constructor(props){
 		super(props)
 		this.state = {
-			email: 'isaiah_thompkins@alumni.brown.edu',
+			email: '',
       phone: '',
 			password: 'foobar',
-			button_text: 'Sign In'
+      signing_in: false
 		}
 		this.sendRequest = this.sendRequest.bind(this)
 	}
 
   sendRequest(){
-   return fetch(BACKEND_API_URI + 'login', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-          'Content-Type': 'application/json',
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-      },      
-      body: JSON.stringify({
-              email: this.state.email,
-              password: this.state.password,
-              phone: this.state.phone,
-            }),
-    })
-    .then((json) => {
-    	console.log(json)
-      this.props.authenticate(json)
-    })
-    .catch((err) => {
-      alert('Log in failed. ERROR: ' + err)
-      document.location.reload()
-    })
+   this.setState({
+     signing_in: true
+   }, () => {
+    fetch(BACKEND_API_URI + 'login', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },      
+        body: JSON.stringify({
+                email: this.state.email,
+                password: this.state.password,
+                phone: this.state.phone,
+              }),
+      })
+      .then((json) => {
+        console.log(json)
+        this.props.authenticate(json)
+      })
+      .catch((err) => {
+        alert('Log in failed. ERROR: ' + err)
+        document.location.reload()
+      })   
+   }) 
   }
 
 	render(){
@@ -57,7 +63,7 @@ class Login extends React.Component{
 							<div onMouseDown={(ev) => this.setState({button_text: 'Signing In...'})} onMouseUp={() => {
                 this.props.authenticate(this.state.email, this.state.password, this.state.phone)
               }} style={styles.button} className='noselect'>
-								{this.state.button_text}
+								{this.state.signing_in ? 'Sign In' : <FontAwesomeIcon icon={faSignInAlt} style={{padding: 6}}/>}
 							</div>
 						</div>
 					</form>
@@ -72,7 +78,8 @@ const styles = {
     backgroundColor: 'white',
     boxShadow: "0px 3px 15px rgba(0,0,0,0.2)",
     borderRadius: '15px', 
-    margin: 'auto'
+    margin: 'auto',
+    width: '95vw'
   },
   header:{
   	margin: 'auto',
@@ -87,13 +94,13 @@ const styles = {
     margin: 'auto',
   },
   button:{
-    width: '20vw',
+    width: '9vw',
     height: '4vh',
-    borderRadius: '10px',
+    borderRadius: '20px',
     backgroundColor: '#47b8e0',
     boxShadow: "0px 3px 15px rgba(0,0,0,0.2)",
     cursor: 'pointer',
-    margin: 'auto',
+    float: 'right',
     color: 'white',
     fontWeight: 'bold',
     padding: '5px',

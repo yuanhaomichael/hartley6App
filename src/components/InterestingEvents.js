@@ -21,7 +21,7 @@ export default class InterestingEvents extends React.Component{
 			          }</b></div>)            
 				      return(
 				        <React.Fragment key={'interests ' + i}>
-				          <EventCard authData={this.props.authData} ev={ev} />
+				          <EventCard authData={this.props.authData} join={() => this.props.join(ev.id)} ev={ev} />
 				        </React.Fragment>
 				      )
 				    })}
@@ -33,7 +33,7 @@ export default class InterestingEvents extends React.Component{
 
 const styles = {
 	container: {
-		width: '100%',
+		width: '100vw',
 		height: '100%',
 		marginTop: 50,
 		marginBottom: 50,
@@ -43,9 +43,10 @@ const styles = {
 		width: '35%',
 		backgroundColor: 'white',
 		borderRadius: '8px',
-		padding: 15
+		padding: 15,
+		marginBottom: 10
 	},
 	events: {
-		marginTop: 20
+		margin: 'auto',
 	},
 }

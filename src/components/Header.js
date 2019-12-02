@@ -1,7 +1,8 @@
 import React from 'react'
 import Modal from './Modal'
+import Drawer from './Drawer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight, faTimes, faBars } from '@fortawesome/free-solid-svg-icons'
 
 import { persistor } from '../configureStore'
 
@@ -19,7 +20,8 @@ class Header extends React.Component{
 			availability: '',
 			tags: [],
 			button_text: 'Submit Event',
-			modal_display: 'none'
+			modal_display: 'none',
+			drawer_display: 'none',
 		}
 		this.openModal = this.openModal.bind(this)
 		this.closeModal = this.closeModal.bind(this)
@@ -61,8 +63,8 @@ class Header extends React.Component{
 					where: '',
 					host: '',
 					time: '',
-					tag: [],
-					availability: 0,
+					tags: [],
+					availability: '',
 					loadText: false,
 					modal_display: 'none',        	
         })
@@ -84,7 +86,7 @@ class Header extends React.Component{
 			where: '',
 			time: '',
 			tags: [],
-			availability: 0,
+			availability: '',
 			modal_display: 'none',
 			loadText: false,
 		})
@@ -92,9 +94,9 @@ class Header extends React.Component{
 
 	addTag(ev){
 		if (ev.key === 'Enter'){
-			if (!this.state.tags.includes(this.state.category)){
+			if (!this.state.tags.includes(this.state.category.toUpperCase())){
 				this.setState({
-					tags: [...this.state.tags, this.state.category],
+					tags: [...this.state.tags, this.state.category.toUpperCase()],
 					category: ''
 				})
 			}else{
@@ -124,7 +126,7 @@ class Header extends React.Component{
 								</div>
 								<div style={{display: 'flex', marginBottom: 10}}>
 									<input style={{width: '60%'}} placeholder="Hosted by" onChange={(ev) => this.setState({host: ev.target.value})} value={this.state.host} />
-									<input style={{width: '35%', marginLeft: "5%"}} placeholder="Attendance" onChange={(ev) => this.setState({availability: ev.target.value})}/>
+									<input style={{width: '35%', marginLeft: "5%"}} placeholder="Attendance" onChange={(ev) => this.setState({availability: ev.target.value})} value={this.state.availability}/>
 								</div>
 								<div style={{marginBottom: 10}}>
 									<input placeholder="When is it?" type="datetime-local" onChange={(ev) => this.setState({time: ev.target.value})} value={this.state.time} />
@@ -160,25 +162,19 @@ class Header extends React.Component{
 						</form>
 					</div>
 				</Modal>
-
-				<div>
-					<div className="pointer" style={{position: 'absolute', top: 3, left: 10, zIndex: 2}}>
-						<span onClick={() => {
-							persistor.purge()
-							document.location.reload()
-						}}>log out</span>
-					</div>
+				<div style={{display: 'flex'}}>
 					<div style={styles.div}>
-						<span style={styles.headerText}>Coins: {this.props.authData.coins}</span>
-					</div>
-					<div style={styles.div}>
-						<span style={styles.headerText}>Hartley 6</span>
+						<FontAwesomeIcon onClick={() => this.setState({drawer_display: 'block'})} style={{...styles.headerText, fontSize: 20, left: 10, top: 12}} icon={faBars} />
 					</div>
 					<div style={styles.div}>
 						{this.props.authData.admin &&
 						<span onClick={this.openModal} style={styles.newEventBtn} className='noselect newEventBtn'>+</span>}
 					</div>
 				</div>
+				<Drawer display={this.state.drawer_display} toggle={() => this.setState({drawer_display: 'none'})} coins={this.props.authData.coins} logOut={() => {
+					persistor.purge()
+					document.location.reload()
+				}}/>				
 			</div>
 		)
 	}
@@ -189,22 +185,20 @@ const styles = {
 	main: {
 		position: 'fixed',
 		top: 0,
-		left: 0,
-		right: 0,
+		width: '100vw',
 		backgroundColor: 'white',
 		height: '45px',
     boxShadow: "0px 3px 15px rgba(0,0,0,0.2)",
     zIndex: 8
 	},
 	div: {
-		display: 'inline-block',
-		align: 'center',
 		width: '33%'
 	},
   form:{
   	width: '90%',
   	margin: 'auto',
-  	height: '100%'
+  	height: '100%',
+  	padding: 20
   },
   formHead:{
   	padding: '20px',
@@ -232,9 +226,9 @@ const styles = {
   },
   span:{
   	color: 'red',
-  	position: 'absolute',
-  	top: 20,
-  	right: 30,
+  	position: 'fixed',
+  	top: 15,
+  	right: 20,
   	cursor: 'pointer',
   },
   headerText: {

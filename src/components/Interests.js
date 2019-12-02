@@ -3,43 +3,37 @@ import '../App.css';
 
 export default function Interests(props){
 		const interests = [
+			'Food',
+			'Campus Events',
+			'Ball Sport',
+			'Racket Sport',
+			'Intellectual',
+			'Movie',
+			'Modern Music',
 			'Fun',
+			'Healthy Lifestyle',
+			'Dessert',
+			'Chess',
+			'Holiday Event',
+			'Social Justice',
+			'NYC Event',
+			'Excursion',
+			'Multicultural',
+			'Games',
+			'Western Food'
 		]
 		return(
 			<div style={styles.container}>
 				<div className="subtleShadow" style={styles.header}>
 					Choose your interests
 				</div>
-				<div style={{width: '95%', margin: 'auto'}}>
-					<div style={{display: 'flex', margin: 'auto', padding: 10}}>
-						<Interest updateInterests={() => props.updateInterests('Fun')} content='Fun'/>
-						<Interest updateInterests={() => props.updateInterests('Food')} content='Food'/>
-						<Interest updateInterests={() => props.updateInterests('Ball Sport')} content='Ball Sport'/>
-						<Interest updateInterests={() => props.updateInterests('Racket Sport')} content='Racket Sport'/>					
-					</div>
-					<div style={{display: 'flex', margin: 'auto', padding: 10}}>
-						<Interest updateInterests={() => props.updateInterests('Intellectual')} content='Intellectual'/>
-						<Interest updateInterests={() => props.updateInterests('Modern Music')} content='Modern Music'/>
-						<Interest updateInterests={() => props.updateInterests('Healthy Lifestyle')} content='Healthy Lifestyle'/>				
-					</div>
-					<div style={{display: 'flex', margin: 'auto', padding: 10}}>
-						<Interest updateInterests={() => props.updateInterests('Dessert')} content='Dessert'/>
-						<Interest updateInterests={() => props.updateInterests('Chess')} content='Chess'/>
-						<Interest updateInterests={() => props.updateInterests('Holiday Event')} content='Holiday Event'/>
-						<Interest updateInterests={() => props.updateInterests('Social Justice')} content='Social Justice'/>					
-					</div>	
-					<div style={{display: 'flex', margin: 'auto', padding: 10}}>
-						<Interest updateInterests={() => props.updateInterests('Western Food')} content='Western Food'/>
-						<Interest updateInterests={() => props.updateInterests('NYC Event')} content='NYC Event'/>
-						<Interest updateInterests={() => props.updateInterests('Excursion')} content='Excursion'/>				
-					</div>
-					<div style={{display: 'flex', margin: 'auto', padding: 10}}>
-						<Interest updateInterests={() => props.updateInterests('Movie')} content='Movie'/>
-						<Interest updateInterests={() => props.updateInterests('Games')} content='Games'/>
-						<Interest updateInterests={() => props.updateInterests('Multicultural')} content='Multicultural'/>
-						<Interest updateInterests={() => props.updateInterests('Campus Event')} content='Campus Event'/>					
-					</div>															
-				</div>			
+				<div style={{display: 'flex', padding: 10, flexWrap: 'wrap', justifyContent: 'center'}}>
+					{interests.map((int, i) => {
+						return (
+							<Interest key={`${int}-${i} `} updateInterests={() => props.updateInterests(int)} content={int}/>
+						)
+					})}					
+				</div>															
 			</div>
 		)	
 } 
@@ -67,7 +61,7 @@ class Interest extends React.Component{
 
 const styles = {
 	container: {
-		width: '100%',
+		width: '100vw',
 		height: '100%',
 		marginTop: 80,
 		marginBottom: 50,
@@ -86,6 +80,7 @@ const styles = {
 		paddingRight: 10,
 		paddingTop: 5,
 		paddingBottom: 5,
-		fontSize: 17
-	}
+		fontSize: 17,
+		margin: 5,
+	},
 }

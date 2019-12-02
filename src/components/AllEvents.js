@@ -15,7 +15,7 @@ export default class AllEvents extends React.Component{
 		return(
 			<div style={styles.container}>
 				<div className="subtleShadow" style={styles.header}>
-					See Upcoming Events
+					Upcoming Events
 				</div>
 				<div style={styles.events}>
 			    {this.props.events.map((ev, i)=>{
@@ -55,7 +55,7 @@ export default class AllEvents extends React.Component{
 
 const styles = {
 	container: {
-		width: '100%',
+		width: '100vw',
 		height: '100%',
 		marginTop: 50,
 		marginBottom: 50,

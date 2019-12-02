@@ -1,13 +1,13 @@
 html, body{
-  width: 100%;
+  width: 100vw;
   font-family: avenir;
+  overflow-x:hidden;
 }
 .App {
   text-align: center;
-  width: 100%;
 }
 .main{
-  width: 90%
+  width: 90vw;
 }
 
 .modal{
@@ -41,6 +41,7 @@ input{
 	border-bottom: 3px solid #B9D9EB;
 	width: 100%;
 	font-size: 20px;
+  font-family: avenir;
 }
 input:focus{
 	outline: none;

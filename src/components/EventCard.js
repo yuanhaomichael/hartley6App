@@ -142,7 +142,7 @@ export default class EventCard extends React.Component{
 						<div style={styles.line}>
 							{parseDate(this.props.ev.time)} {this.props.ev.time.replace(this.props.ev.time.substring(this.props.ev.time.indexOf('T'), this.props.ev.time.length), "").replace('T', '@').replace('2019-', '')}
 						</div>
-						<div style={{...styles.line, position: 'absolute', bottom: 35,}}>
+						<div style={{...styles.line, position: 'absolute', bottom: 39,}}>
 							<span onClick={() => this.setState({groupModal: 'block'})} style={{textDecoration: 'underline', cursor: 'pointer'}}>See who's going</span> | {this.props.ev.availability} spots left
 						</div>
 					</div>
@@ -174,6 +174,7 @@ export default class EventCard extends React.Component{
 function parseDate(date){
 	let v1 = date.replace('T', '@').replace('2019-', '')
 	let milTime = v1.split(':', 2).join(':').replace(v1.split(':', 2).join(':').substring(0,v1.split(':', 2).join(':').indexOf('@') + 1), "")
+	console.log(milTime)
 	let time = (parseInt(milTime.split(':')[0]) > 12 ? milTime.replace(milTime.substring(0,2), parseInt(milTime.split(':')[0]) - 12) + " PM" : milTime.replace(milTime.substring(0,2), parseInt(milTime.split(':')[0])) + " AM")
 	return time
 }
@@ -181,7 +182,7 @@ function parseDate(date){
 const styles = {
 	card: {
 		width: '95%',
-		height: '30vh',
+		height: '23vh',
 		backgroundColor: 'white',
 		borderRadius: 12,
 		margin: 'auto',
@@ -212,11 +213,13 @@ const styles = {
 		position: 'absolute',
 		bottom: 28,
 		display: 'flex',
+		right: 10,
 		width: '100%',
 	},
 	top_icon: {
 		position: 'absolute',
 		top: 5,
+		right: 10,
 		width: '100%',
 	},
 	icon: {
