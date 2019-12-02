@@ -129,10 +129,10 @@ class Header extends React.Component{
 									<input style={{width: '35%', marginLeft: "5%"}} placeholder="Attendance" onChange={(ev) => this.setState({availability: ev.target.value})} value={this.state.availability}/>
 								</div>
 								<div style={{marginBottom: 10}}>
-									<input placeholder="When is it?" type="datetime-local" onChange={(ev) => this.setState({time: ev.target.value})} value={this.state.time} />
+									<input style={{width: '100%'}} placeholder="When is it?" type="datetime-local" onChange={(ev) => this.setState({time: ev.target.value})} value={this.state.time} />
 								</div>
 								<div style={{marginBottom: 10}}>
-									<input placeholder="Location" onChange={(ev) => this.setState({where: ev.target.value})} value={this.state.where} />
+									<input style={{width: '100%'}} placeholder="Location" onChange={(ev) => this.setState({where: ev.target.value})} value={this.state.where} />
 								</div>								
 								<div style={{marginBottom: 10, display: 'flex'}}>
 									{this.state.tags.map((tag,i) => {

@@ -9,7 +9,7 @@ export default function DrawerMenu(props){
 			<div style={styles.overlay}>
 				<div style={styles.menu}>
 					<div style={styles.header}>
-						<FontAwesomeIcon icon={faUser} style={{fontSize: 150, color: 'black', marginTop: 15}}/>
+						<FontAwesomeIcon icon={faUser} style={{fontSize: 150, color: 'black', marginTop: 10}}/>
 					</div>
 					<div style={styles.body}>
 						<div style={{left: 10, position: 'absolute'}}>

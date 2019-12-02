@@ -126,7 +126,7 @@ export default class EventCard extends React.Component{
 						)
 					})}
 				</Modal>
-				<Modal display={this.state.shareModal}>
+				<Modal display={this.state.shareModal} headerLabel={'Share (Coming Soon)'} >
 					<div>
 						<FontAwesomeIcon style={{color: 'red', cursor: 'pointer', float: 'right', padding: 20}} onClick={() => this.setState({shareModal: 'none'})} icon={faTimes} />
 					</div>				

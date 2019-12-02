@@ -91,10 +91,10 @@ class App extends React.Component {
     })
     .then((res) => res.json())
     .then((json) => {
-      alert('Event joined.')
       this.setState({
         events: [...json['events']],       
       })
+      alert('Event joined.')
     })
     .catch((err) => alert('Failed to join event.'))
   }
