@@ -121,7 +121,7 @@ class Header extends React.Component{
 					<div style={{height: '100%', marginTop: 20}} >
 						<form style={styles.form}>
 							<div style={{height: '100%'}} >
-								<div style={{marginBottom: 10}}>
+								<div style={{marginBottom: 10, display: 'flex'}}>
 									<input placeholder="Event Name" onChange={(ev) => this.setState({title: ev.target.value})} value={this.state.title} />
 								</div>
 								<div style={{display: 'flex', marginBottom: 10}}>
@@ -131,7 +131,7 @@ class Header extends React.Component{
 								<div style={{marginBottom: 10}}>
 									<input style={{width: '100%'}} placeholder="When is it?" type="datetime-local" onChange={(ev) => this.setState({time: ev.target.value})} value={this.state.time} />
 								</div>
-								<div style={{marginBottom: 10}}>
+								<div style={{marginBottom: 10, display: 'flex'}}>
 									<input style={{width: '100%'}} placeholder="Location" onChange={(ev) => this.setState({where: ev.target.value})} value={this.state.where} />
 								</div>								
 								<div style={{marginBottom: 10, display: 'flex'}}>
