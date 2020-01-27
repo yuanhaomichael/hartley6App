@@ -142,6 +142,9 @@ export default class EventCard extends React.Component{
 						<div style={styles.line}>
 							{getDay(this.props.ev.time)}, {this.props.ev.time.replace(this.props.ev.time.substring(this.props.ev.time.indexOf('T'), this.props.ev.time.length), "").replace('T', '@').replace('2019-', '').replace('-', '/')} at {parseDate(this.props.ev.time)} 
 						</div>
+						<div style={styles.line}>
+							{this.props.ev.location} 
+						</div>            
 						<div style={{...styles.line, position: 'absolute', bottom: 39,}}>
 							<span onClick={() => this.setState({groupModal: 'block'})} style={{textDecoration: 'underline', cursor: 'pointer'}}>See who's going</span> &nbsp;| {this.props.ev.availability} spots left
 						</div>
@@ -203,7 +206,7 @@ function parseDate(date){
 const styles = {
 	card: {
 		width: '95%',
-		height: '23vh',
+		height: '175px',
 		backgroundColor: 'white',
 		borderRadius: 12,
 		margin: 'auto',

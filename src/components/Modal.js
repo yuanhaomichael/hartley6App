@@ -13,8 +13,8 @@ class Modal extends React.Component{
 		return(
 			<div style={{display: this.props.display}}>
 				<div style={styles.overlay}>
-					<div className='subtleShadow' style={{backgroundColor: 'white', position: 'relative', top: 5, height: '7vh', width: '30vh', borderRadius: '15px', margin: 'auto', overflow: 'hidden', marginTop: 15, fontWeight: 'bold'}}>
-						<h2>{this.props.headerLabel}</h2>
+					<div className='subtleShadow' style={styles.label}>
+						<h4 style={styles.labelText}>{this.props.headerLabel}</h4>
 					</div>
 					<div className='modal' style={styles.modal}>
 						{this.props.children}
@@ -40,8 +40,20 @@ const styles = {
 		backgroundColor: 'white',
 		borderRadius: '15px',
 		top: 10,
-		height: '40vh',
+		height: 'auto',
 		position: 'relative'
+	},
+	label: {
+		backgroundColor: 'white', 
+		height: 'auto', 
+		width: '20vh', 
+		borderRadius: '15px', 
+		margin: 'auto', 
+		marginTop: 15, 
+		fontWeight: 'bold', 
+	},
+	labelText: {
+		paddingTop: 1
 	}
 }
 

@@ -17,7 +17,7 @@ class Header extends React.Component{
 			host: '',
 			where: '',
 			time: '',
-			availability: '',
+      availability: '',
 			tags: [],
 			button_text: 'Submit Event',
 			modal_display: 'none',
@@ -118,9 +118,9 @@ class Header extends React.Component{
 					<div style={styles.div}>
 						<span onClick={this.closeModal} style={styles.span}><FontAwesomeIcon icon={faTimes} size="lg"/></span>
 					</div>
-					<div style={{height: '100%', marginTop: 20}} >
+					<div style={{height: 'auto'}} >
 						<form style={styles.form}>
-							<div style={{height: '100%'}} >
+							<div style={{height: 'auto'}} >
 								<div style={{marginBottom: 10, display: 'flex'}}>
 									<input placeholder="Event Name" onChange={(ev) => this.setState({title: ev.target.value})} value={this.state.title} />
 								</div>
@@ -146,8 +146,9 @@ class Header extends React.Component{
 
 									<input placeholder="Add tags [ENTER to Add]" onKeyPress={(ev) => this.addTag(ev)} onChange={(ev) => this.setState({category: ev.target.value})} value={this.state.category} />
 								</div>
+                <div style={{height: '5vh'}}>
 									{this.state.loadText ? 
-										<div style={{float: 'right', marginTop: 15}}>
+										<div style={{float: 'right', marginTop: 8}}>
 											<div className="loader"></div>
 										</div> 
 										:
@@ -155,9 +156,10 @@ class Header extends React.Component{
 											this.setState({loadText: true})
 											this.sendRequest()
 										}} style={{...styles.button, float: 'right'}}>
-										 <FontAwesomeIcon icon={faArrowRight} />
+										 <FontAwesomeIcon style={{verticalAlign: 'top'}} icon={faArrowRight} />
 										</div>
 										}
+                  </div>
 							</div>
 						</form>
 					</div>
@@ -195,26 +197,26 @@ const styles = {
 		width: '33%'
 	},
   form:{
-  	width: '90%',
+  	width: '85%',
   	margin: 'auto',
   	height: '100%',
-  	padding: 20
+    padding: 20,
   },
   formHead:{
   	padding: '20px',
   },
   button:{
     width: '5vw',
-    height: '2vh',
+    height: '3vh',
     borderRadius: '30px',
     backgroundColor: '#47b8e0',
     boxShadow: "0px 3px 15px rgba(0,0,0,0.2)",
     cursor: 'pointer',
     color: 'white',
     fontWeight: 'bold',
-    marginTop: '15px',
-    padding: '5px',
+    padding: '6px',
     borderBottom: '1px solid black',
+    margin: 5,
   },
   newEventBtn:{
     right: 15,

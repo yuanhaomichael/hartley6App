@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Terms from './Terms'
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
@@ -10,32 +11,30 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  withRouter
 } from "react-router-dom";
 
 const ReduxWrapper = () => {
 	return (
 		<Provider store={store}>
-			<PersistGate loading={null} persistor={persistor}>
+      <PersistGate persistor={persistor}>
         <Router>
           <Switch>
-            <Route path="/">
-							<App />
-            </Route>
-            <Route path="/terms">
-              <div>
-                terms
-              </div>
-            </Route>
+            <Route 
+              path="/" 
+              component={App} 
+              exact
+            />
+            <Route 
+              path="/privacy" 
+              component={Terms} 
+            />
           </Switch>
-        </Router>		
-			</PersistGate>
+        </Router>
+      </PersistGate>		
 		</Provider>       
-		)
+	)
 }
 
-withRouter(ReduxWrapper)
 
 ReactDOM.render(<ReduxWrapper />, document.getElementById('root'));
 

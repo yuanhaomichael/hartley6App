@@ -6,8 +6,11 @@ import Interests from './components/Interests'
 import AllEvents from './components/AllEvents'
 import InterestingEvents from './components/InterestingEvents'
 import Header from './components/Header'
-import LoginCard from './components/Login'
-
+import AuthCard from './components/AuthCard'
+import WelcomeCard from './components/WelcomeCard'
+import {
+  withRouter
+} from "react-router-dom";
 import { BACKEND_API_URI }from './constants'
 
 class App extends React.Component {
@@ -130,7 +133,8 @@ class App extends React.Component {
     return (
       <div className="App">
         {this.props.auth.authenticated && <Header authData={this.props.auth} events={(json) => this.setState({events: json})} />}
-        {!this.props.auth.authenticated && <LoginCard authenticate={(email, password, phone) => this.props.login(email, password, phone)} />}              
+        {!this.props.auth.authenticated && <WelcomeCard />}              
+        {!this.props.auth.authenticated && <AuthCard authenticate={(email, password, phone) => this.props.login(email, password, phone)} />}              
         <Interests updateInterests={(interest) => this.updateInterests(interest)} />
         <InterestingEvents authData={this.props.auth} join={(id) => this.join(id)} events={this.state.interestedEvents}/>
         <AllEvents authData={this.props.auth} join={(id) => this.join(id)} events={this.state.events}/>
@@ -138,6 +142,7 @@ class App extends React.Component {
     );
   }
 }
+
 function getEvents(authData, tags = []){
   return fetch(BACKEND_API_URI + 'events', {
     method: 'POST',
@@ -152,6 +157,7 @@ function getEvents(authData, tags = []){
     })
   })
 }
+
 function mapStateToProps(state){
   return {
     auth: state.authReducer
@@ -164,4 +170,4 @@ function mapDispatchToProps(dispatch){
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

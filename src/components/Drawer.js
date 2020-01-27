@@ -1,31 +1,35 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
 
+import {
+	Link,
+	withRouter
+  } from "react-router-dom";
 
-export default function DrawerMenu(props){
+function DrawerMenu(props){
 	return (
 		<div style={{display: props.display}}>
 			<div style={styles.overlay}>
 				<div style={styles.menu}>
-					<div style={styles.header}>
-						<FontAwesomeIcon icon={faUser} style={{fontSize: 150, color: 'black', marginTop: 10}}/>
-					</div>
 					<div style={styles.body}>
-						<div style={{left: 10, position: 'absolute'}}>
+						<div style={{position: 'absolute', borderBottom: '1px solid black', width: '100%'}}>
 							<h2 style={styles.menuText}>Coins: {props.coins}</h2>
+						</div>
+						<div style={{left: 10, top: '15%', position: 'absolute',}}>
+							<Link to="/privacy" style={{textDecoration: 'none'}}><h2 style={styles.menuText}>Privacy</h2></Link>
 						</div>
 						<div style={{bottom: 5, left: 10, position: 'absolute',}}>
 							<h2 onClick={() => props.logOut()} style={styles.menuText}>Log Out</h2>
 						</div>
 					</div>
 				</div>
-				<div onClick={() => props.toggle()} style={{height: '100%', width: '17%', position: 'absolute', right: 0}}>
+				<div onClick={() => props.toggle()} style={{height: '100%', width: '40%', position: 'absolute', right: 0}}>
 				</div>
 			</div>
 		</div>
 	)
 }
+
+export default withRouter(DrawerMenu)
 
 const styles = {
 	overlay:{
@@ -43,20 +47,14 @@ const styles = {
 		top: 0,
 		bottom: 0,
 		position: 'absolute',
-		width: '83%',		
+		width: '60%',		
 	},
 	menuText:{
-		textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
-		color: 'white',
-	},
-	header: {
-		width: '100%',
-		height: '25%',
-		borderBottom: '3px solid black'
+    color: 'black',
 	},
 	body:{
-		backgroundColor: 'rgb(158,209,237)',
+		backgroundColor: 'white',
 		width: '100%',
-		height: '75%'
+		height: '100%'
 	},
 }
