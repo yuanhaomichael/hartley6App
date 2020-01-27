@@ -132,7 +132,7 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        {this.props.auth.authenticated && <Header authData={this.props.auth} events={(json) => this.setState({events: json})} />}
+        <Header authData={this.props.auth} events={(json) => this.setState({events: json})} />
         {!this.props.auth.authenticated && <WelcomeCard />}              
         {!this.props.auth.authenticated && <AuthCard authenticate={(email, password, phone) => this.props.login(email, password, phone)} />}              
         <Interests updateInterests={(interest) => this.updateInterests(interest)} />

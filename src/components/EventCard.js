@@ -122,7 +122,7 @@ export default class EventCard extends React.Component{
 					</div>
 					{this.state.members.map((member, i) => {
 						return(
-							<div key={member + "-" + i}>{member.first_name + " " + member.last_name}</div>
+							<div key={member + "-" + i} style={{padding: 20}}>{member.first_name + " " + member.last_name}</div>
 						)
 					})}
 				</Modal>
@@ -206,7 +206,7 @@ function parseDate(date){
 const styles = {
 	card: {
 		width: '95%',
-		height: '175px',
+		height: '185px',
 		backgroundColor: 'white',
 		borderRadius: 12,
 		margin: 'auto',

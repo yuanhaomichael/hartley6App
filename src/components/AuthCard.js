@@ -17,7 +17,8 @@ class AuthCard extends React.Component{
       newUser: false,
       signUpError: false,
 		}
-		this.sendRequest = this.sendRequest.bind(this)
+    this.sendRequest = this.sendRequest.bind(this);
+    this.signUp = this.signUp.bind(this);
 	}
 
   sendRequest(){
@@ -48,6 +49,25 @@ class AuthCard extends React.Component{
    }) 
   }
 
+  async signUp(){
+    if(this.state.password == this.state.confirmPassword)
+    {fetch(BACKEND_API_URI + 'sign_up', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password,
+        phone: this.state.phone,
+      })
+    })
+    .then(() => this.props.authenticate(this.state.email, this.state.password, this.state.phone))
+    .catch(() => alert('failed to log in.'))}
+  }
+
 	render(){
 		return(
 			<div className='main-lg' style={styles.main}>
@@ -76,7 +96,8 @@ class AuthCard extends React.Component{
             <div style={{flex:5}}>
             </div>
             <div style={{flex:1}}>
-              <div onMouseDown={(ev) => this.setState({button_text: 'Signing In...'})} onMouseUp={() => {
+              <div onMouseDown={(ev) => this.setState({button_text: 'Signing In...'})} onMouseUp={async () => {
+                if (this.state.newUser){await this.signUp()}
                 this.props.authenticate(this.state.email, this.state.password, this.state.phone)
               }} style={styles.button} className='noselect'>
                 {this.state.signingIn ? 'Sign In' : <FontAwesomeIcon icon={faSignInAlt} style={{padding: 6}}/>}

@@ -12,9 +12,9 @@ export default function WelcomeCard(){
         </div>
         <p style={{paddingLeft: 30}}>Dear User, </p>
         <p style={styles.paragraph}>
-        Welcome to Evento, a more spontaneous way to engage with the world; 
-        simply choose your interests & let us recommend campus events that truly matter to you. 
-        Remember to save Evento to your home screen!
+          Welcome to Evento, a more spontaneous way to engage with the world; 
+          simply choose your interests & let us recommend campus events that truly matter to you. 
+          Remember to save Evento to your home screen!
         </p>
         <p style={{paddingLeft: 30}}>Best, </p>
         <p style={{paddingLeft: 30}}>The Evento Team</p>
@@ -31,7 +31,7 @@ const styles = {
     borderRadius: '15px', 
     margin: 'auto',
     width: '95vw',
-    marginTop: 20,
+    marginTop: 50,
     textAlign: 'left',
   },
   body:{
