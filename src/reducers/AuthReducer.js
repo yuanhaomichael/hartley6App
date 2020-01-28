@@ -24,7 +24,7 @@ export function authReducer(state = initialState, action){
 				authenticated: true,
 				token: action.data.access_token,
 				admin: action.data.admin,
-				userId: action.data.access_token[0],
+				userId: action.data.access_token.split(':')[0],
 				coins: action.data.coins
 			}
 		case LOG_IN_FAILURE:

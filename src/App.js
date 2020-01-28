@@ -130,6 +130,7 @@ class App extends React.Component {
 
 
   render(){
+    console.log(this.props.auth.userId)
     return (
       <div className="App">
         <Header authData={this.props.auth} events={(json) => this.setState({events: json})} />

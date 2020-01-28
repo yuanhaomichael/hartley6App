@@ -77,7 +77,7 @@ export default class EventCard extends React.Component{
 		     	 //'Content-Type':'application/x-www-form-urlencoded',
 		    },
 		    body: JSON.stringify({
-		    	event_id: this.props.ev.id
+          event_id: this.props.ev.id,
 		    })
 		})
 		.then((res) => res.json())
