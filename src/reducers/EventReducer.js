@@ -1,27 +1,26 @@
 import { GET_EVENTS, GET_EVENTS_SUCCESS, GET_EVENTS_FAILURE } from '../constants'
 
 const initialState = {
-	events: []
+  events: [],
+  interests: [],
 }
 
 export function eventsReducer(state = initialState, action){
 	switch(action.type){
-		case LOG_IN:
+		case GET_EVENTS:
 			return {
 				...state,
 				events: []
 			}
-		case LOG_IN_SUCCESS:
+		case GET_EVENTS_SUCCESS:
 			return {
 				...state,
 				events: []
 			}
-		case LOG_IN_FAILURE:
+		case GET_EVENTS_FAILURE:
 			return {
 				...state,
-				authenticated: false,
-				error: true,
-				token: '',
+				events: [],
 			}
 		default:
 			return state

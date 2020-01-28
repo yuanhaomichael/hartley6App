@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { logInFunc } from './actions'
+import { logInFunc, getEventsFunc } from './actions'
 import { connect } from 'react-redux'
 import Interests from './components/Interests'
 import AllEvents from './components/AllEvents'
@@ -168,6 +168,7 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
   return {
     login: (email, password, phone) => dispatch(logInFunc(email, password, phone)),
+    getEvents: (authData, tags = []) => dispatch(getEventsFunc(authData, tags = []))
   }
 }
 

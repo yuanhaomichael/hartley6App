@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_IN_SUCCESS, LOG_IN_FAILURE, BACKEND_API_URI } from './constants'
+import { LOG_IN, LOG_IN_SUCCESS, LOG_IN_FAILURE, GET_EVENTS, GET_EVENTS_SUCCESS, GET_EVENTS_FAILURE, BACKEND_API_URI } from './constants'
 
 // Master Actions
 export function logInFunc(email, password, phone = null){
@@ -30,28 +30,29 @@ export function logInFunc(email, password, phone = null){
 	}
 }
 
-export function getEventsFunc(){
+export function getEventsFunc(authData, tags = []){
 	return (dispatch) => {
-		dispatch(getAuth());
-		fetch(encodeURI(BACKEND_API_URI + 'login'),
-		{
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-		      	'Content-Type': 'application/json',
-		     	 //'Content-Type':'application/x-www-form-urlencoded',
-		    },
-		body: JSON.stringify({
-		}),
-		})
+		dispatch(getEvents());
+		fetch(BACKEND_API_URI + 'events', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+      'Content-Type': 'application/json',
+      'authToken': authData.authToken,
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({
+        tags: tags
+      })
+    })
 		.then((res) => {
 			return res.json()
 		})
 		.then(json => {
-			dispatch(getAuthSuccess(json))
+			dispatch(getEventsSuccess(json))
 		})
 		.catch(err => {
-			dispatch(getAuthFailure(err))
+			dispatch(getEventsFailure(err))
 		})
 	}
 }
@@ -74,5 +75,25 @@ function getAuthSuccess(data){
 function getAuthFailure(){
 	return {
 		type: LOG_IN_FAILURE
+	}
+}
+
+// Events
+function getEvents(){
+	return {
+		type: GET_EVENTS,
+	}
+}
+
+function getEventsSuccess(data){
+	return {
+		type: GET_EVENTS_SUCCESS,
+		data
+	}
+}
+
+function getEventsFailure(){
+	return {
+		type: GET_EVENTS_FAILURE,
 	}
 }
