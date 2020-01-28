@@ -50,10 +50,10 @@ const styles = {
 		borderRadius: '15px', 
 		margin: 'auto', 
 		marginTop: 15, 
-		fontWeight: 'bold', 
+    fontWeight: 'bold',
 	},
 	labelText: {
-		paddingTop: 1
+		padding: 8,
 	}
 }
 
