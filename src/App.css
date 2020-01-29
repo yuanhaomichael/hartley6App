@@ -72,6 +72,9 @@ input:focus{
 }
 
 @media only screen and (max-width: 600px) {
+  .logoImg{
+    width: '40%';
+  }
   .main{
     width: 100%;
   }

@@ -1,12 +1,13 @@
 import React from 'react';
 
 export default function WelcomeCard(){
+  console.log(window.innerHeight)
   return(
     <div className='main-lg' style={styles.main}>
       <div style={styles.body}>
         <div style={{position: 'relative', textAlign: 'center'}}>
-          <img src="../eventoLogo.png"  style={styles.img}/>
-          <div style={{position: 'absolute', left: '42%', top: '80%'}}>
+          <img src="../eventoLogo.png" className="logoImg"  style={styles.img}/>
+          <div style={{position: 'absolute', left: (window.innerHeight > 500 ? '42%': '47%'), top: '80%'}}>
            Evento
           </div>         
         </div>
@@ -40,7 +41,7 @@ const styles = {
     paddingBottom: 20,
   },
   img:{
-    width: '40%',
+    width: (window.innerHeight > 500 ? '40%': '10%'),
     paddingBottom: 0,
   },
   paragraph: {

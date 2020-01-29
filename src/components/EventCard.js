@@ -142,7 +142,7 @@ export default class EventCard extends React.Component{
 						<div style={styles.line}>
 							{getDay(this.props.ev.time)}, {this.props.ev.time.replace(this.props.ev.time.substring(this.props.ev.time.indexOf('T'), this.props.ev.time.length), "").replace('T', '@').replace('2019-', '').replace('-', '/')} at {parseDate(this.props.ev.time)} 
 						</div>
-						<div style={styles.line}>
+						<div style={{...styles.line, marginBottom: 15}}>
 							{this.props.ev.location} 
 						</div>            
 						<div style={{...styles.line, position: 'absolute', bottom: 39,}}>
@@ -223,7 +223,8 @@ const styles = {
 		display: 'flex',
 		align: 'left',
 		padding: 3,
-		textAlign: 'left',
+    textAlign: 'left',
+    height: 'auto',
 	},
 	left: {
 		width: '75%',
