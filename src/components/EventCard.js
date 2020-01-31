@@ -1,5 +1,5 @@
 import React from 'react'
-import '../App.css';
+import classes from '../App.css';
 import Modal from './Modal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
@@ -115,7 +115,7 @@ export default class EventCard extends React.Component{
 
 	render(){
 		return(
-			<div className="subtleShadow" style={styles.card}>
+			<div className={classes.black} style={styles.card}>
 				<Modal display={this.state.groupModal} headerLabel={'People Attending'}>
 					<div>
 						<FontAwesomeIcon style={{color: 'red', cursor: 'pointer', float: 'right', padding: 20}} onClick={() => this.setState({groupModal: 'none'})} icon={faTimes} />

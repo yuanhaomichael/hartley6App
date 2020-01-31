@@ -7,7 +7,7 @@ export default function WelcomeCard(){
       <div style={styles.body}>
         <div style={{position: 'relative', textAlign: 'center'}}>
           <img src="../eventoLogo.png" className="logoImg"  style={styles.img}/>
-          <div style={{position: 'absolute', left: (window.innerHeight > 500 ? '42%': '47%'), top: '80%'}}>
+          <div style={{position: 'absolute', left: (isMobileDevice() ? '42%': '47%'), top: '80%'}}>
            Evento
           </div>         
         </div>
@@ -23,7 +23,9 @@ export default function WelcomeCard(){
     </div>
   )
 }
-
+function isMobileDevice() {
+  return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+};
 const styles = { 
   main:{
     height: 'auto',

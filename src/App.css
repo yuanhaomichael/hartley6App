@@ -70,7 +70,9 @@ input:focus{
     transform: rotate(360deg);
   }
 }
-
+.black{
+  background-color: black;
+}
 @media only screen and (max-width: 600px) {
   .logoImg{
     width: '40%';
