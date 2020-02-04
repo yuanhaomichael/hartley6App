@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function WelcomeCard(){
-  console.log(window.innerHeight)
   return(
     <div className='main-lg' style={styles.main}>
       <div style={styles.body}>

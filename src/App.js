@@ -27,9 +27,11 @@ class App extends React.Component {
   }
   
 
-  componentDidMount(){
-    getEvents(this.state)
-    .then((res) => res.json())
+  async componentDidMount(){
+    await getEvents(this.props.auth)
+    .then((res) => {
+      console.log(res)
+      return res.json()})
     .then((json) => this.setState({
         events: [...json['events']]
     }))
@@ -142,13 +144,13 @@ class App extends React.Component {
   }
 }
 
-function getEvents(authData, tags = []){
+async function getEvents(authData, tags = []){
   return fetch(BACKEND_API_URI + 'events', {
     method: 'POST',
     mode: 'cors',
     headers: {
     'Content-Type': 'application/json',
-    'authToken': authData.authToken,
+    'authToken': authData.token,
         // 'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: JSON.stringify({

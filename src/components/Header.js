@@ -173,10 +173,16 @@ class Header extends React.Component{
 						<span onClick={this.openModal} style={styles.newEventBtn} className='noselect newEventBtn'>+</span>}
 					</div>
 				</div>
-				<Drawer display={this.state.drawer_display} toggle={() => this.setState({drawer_display: 'none'})} coins={this.props.authData.coins} logOut={() => {
-					persistor.purge()
-					document.location.reload()
-				}}/>				
+        <Drawer 
+          display={this.state.drawer_display} 
+          toggle={() => this.setState({drawer_display: 'none'})} 
+          coins={this.props.authData.coins} 
+          logOut={() => {
+            persistor.purge()
+            document.location.reload()
+          }}
+          authData={this.props.authData}
+        />				
 			</div>
 		)
 	}

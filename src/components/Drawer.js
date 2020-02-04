@@ -17,9 +17,10 @@ function DrawerMenu(props){
 						<div style={{left: 10, top: '15%', position: 'absolute',}}>
 							<Link to="/privacy" style={{textDecoration: 'none'}}><h2 style={styles.menuText}>Privacy</h2></Link>
 						</div>
-						<div style={{bottom: 5, left: 10, position: 'absolute',}}>
+						{props.authData.token.length > 0 &&
+            <div style={{bottom: 5, left: 10, position: 'absolute',}}>
 							<h2 onClick={() => props.logOut()} style={styles.menuText}>Log Out</h2>
-						</div>
+						</div>}
 					</div>
 				</div>
 				<div onClick={() => props.toggle()} style={{height: '100%', width: '40%', position: 'absolute', right: 0}}>

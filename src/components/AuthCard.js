@@ -25,8 +25,8 @@ class AuthCard extends React.Component{
    this.setState({
      signing_in: true
    }, () => {
-    fetch(BACKEND_API_URI + 'login', {
-        method: 'POST',
+    fetch(BACKEND_API_URI + 'sign_up', {
+        method: 'PUT',
         mode: 'cors',
         headers: {
             'Content-Type': 'application/json',
@@ -35,12 +35,14 @@ class AuthCard extends React.Component{
         body: JSON.stringify({
                 email: this.state.email,
                 password: this.state.password,
+                confirmPassword: this.state.confirmPassword,
                 phone: this.state.phone,
               }),
       })
+      .then((res) => res.json())
       .then((json) => {
         console.log(json)
-        this.props.authenticate(json)
+        this.props.authenticate(json.email, this.state.password, json.phone)
       })
       .catch((err) => {
         alert('Log in failed. ERROR: ' + err)
@@ -137,7 +139,10 @@ function NewUserComponent(props){
       </div> 
       <div style={styles.input_div}>
         <input onChange={(ev) => props.this.setState({confirmPassword: ev.target.value})} value={props.this.state.confirmPassword} placeholder='Confirm Password' type="password" />
-      </div>                           
+      </div>
+      <div style={styles.input_div}>
+        <span style={styles.updateText} onClick={() => props.this.sendRequest()}>or update account</span>
+      </div>                                 
     </form>    
   )
 }
@@ -191,6 +196,11 @@ const styles = {
   banner: {
     flex: 1,
     padding: 10,
+  },
+  updateText:{
+    textDecoration: 'underline',
+    color: '#47b8e0',
+    cursor: 'pointer',
   }
 }
 
