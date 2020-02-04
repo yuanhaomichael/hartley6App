@@ -42,7 +42,7 @@ const styles = {
     paddingBottom: 20,
   },
   img:{
-    width: (window.innerHeight > 500 ? '40%': '10%'),
+    width: (isMobileDevice() ? '40%': '10%'),
     paddingBottom: 0,
   },
   paragraph: {

@@ -30,7 +30,6 @@ class App extends React.Component {
   async componentDidMount(){
     await getEvents(this.props.auth)
     .then((res) => {
-      console.log(res)
       return res.json()})
     .then((json) => this.setState({
         events: [...json['events']]
