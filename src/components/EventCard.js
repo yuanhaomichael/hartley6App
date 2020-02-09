@@ -125,7 +125,6 @@ export default class EventCard extends React.Component{
 							<div key={member + "-" + i} style={{padding: 10}}>{member.first_name == null ? member.email : member.first_name + " " + member.last_name}</div>
 						)
 					})}
-          fasfafdsasafaesd
 				</Modal>
 				<Modal display={this.state.shareModal} headerLabel={'Share (Coming Soon)'} >
 					<div>
