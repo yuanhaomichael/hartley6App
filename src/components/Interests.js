@@ -20,7 +20,8 @@ export default function Interests(props){
 			'Excursion',
 			'Multicultural',
 			'Games',
-			'Western Food'
+      'Western Food',
+      'Hartley 6',
 		]
 		return(
 			<div style={styles.container}>

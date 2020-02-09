@@ -169,8 +169,7 @@ class Header extends React.Component{
 						<FontAwesomeIcon onClick={() => this.setState({drawer_display: 'block'})} style={{...styles.headerText, fontSize: 20, left: 10, top: 12}} icon={faBars} />
 					</div>
 					<div style={styles.div}>
-						{this.props.authData.admin &&
-						<span onClick={this.openModal} style={styles.newEventBtn} className='noselect newEventBtn'>+</span>}
+						<span onClick={this.openModal} style={styles.newEventBtn} className='noselect newEventBtn'>+</span>
 					</div>
 				</div>
         <Drawer 

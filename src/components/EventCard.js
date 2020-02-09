@@ -116,15 +116,16 @@ export default class EventCard extends React.Component{
 	render(){
 		return(
 			<div className={classes.black} style={styles.card}>
-				<Modal display={this.state.groupModal} headerLabel={'People Attending'}>
+				<Modal display={this.state.groupModal} headerLabel={'People Attending'} onClick={() => this.setState({groupModal: 'none'})}>
 					<div>
 						<FontAwesomeIcon style={{color: 'red', cursor: 'pointer', float: 'right', padding: 20}} onClick={() => this.setState({groupModal: 'none'})} icon={faTimes} />
 					</div>
 					{this.state.members.map((member, i) => {
 						return(
-							<div key={member + "-" + i} style={{padding: 20}}>{member.first_name + " " + member.last_name}</div>
+							<div key={member + "-" + i} style={{padding: 10}}>{member.first_name == null ? member.email : member.first_name + " " + member.last_name}</div>
 						)
 					})}
+          fasfafdsasafaesd
 				</Modal>
 				<Modal display={this.state.shareModal} headerLabel={'Share (Coming Soon)'} >
 					<div>
