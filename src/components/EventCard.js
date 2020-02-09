@@ -23,7 +23,7 @@ export default class EventCard extends React.Component{
 
 	componentDidMount(){
 		if (this.props.authData.token.length > 0){		
-	//Get likes
+	  //Get likes
 		fetch(encodeURI(BACKEND_API_URI + 'event/event_like'), {
 			method: 'POST',
 			headers: {
@@ -39,6 +39,7 @@ export default class EventCard extends React.Component{
 			return res.json()
 		})
 		.then((json) => {
+      console.log(json.events)
 			this.setState({
 				likes: true,
 				likesCount: json.events.length
@@ -87,7 +88,7 @@ export default class EventCard extends React.Component{
 				likesCount: json.events.length
 			})
 		})
-		.catch((err) => err)
+		.catch((err) => console.log(err))
 	}
 
 	sendUnlike(){
@@ -110,7 +111,7 @@ export default class EventCard extends React.Component{
 				likesCount: null
 			})
 		})
-		.catch((err) => err)
+		.catch((err) => console.log(err))
 	}
 
 	render(){
@@ -122,7 +123,7 @@ export default class EventCard extends React.Component{
 					</div>
 					{this.state.members.map((member, i) => {
 						return(
-							<div key={member + "-" + i} style={{padding: 10}}>{member.first_name == null ? member.email : member.first_name + " " + member.last_name}</div>
+							<div key={member + "-" + i} style={{padding: 10, alignContent: 'center'}}>{member.first_name == null ? member.email : member.first_name + " " + member.last_name}</div>
 						)
 					})}
 				</Modal>
