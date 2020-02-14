@@ -3,7 +3,7 @@ import classes from '../App.css';
 import Modal from './Modal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
-import { faUserPlus, faShare, faTimes, faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons'
+import { faUserPlus, faShare, faTimes, faTrash, faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons'
 
 import {BACKEND_API_URI} from '../constants'
 
@@ -112,7 +112,22 @@ export default class EventCard extends React.Component{
 			})
 		})
 		.catch((err) => console.log(err))
-	}
+  }
+  
+  destroyEvent(){
+    fetch(BACKEND_API_URI + 'event', {
+      method: 'DELETE',
+      headers: {
+				Accept: 'application/json',
+      	'Content-Type': 'application/json',
+      	'authToken': this.props.authData.token
+     	 //'Content-Type':'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify({
+		    	event_id: this.props.ev.id
+		    })
+    })
+  }
 
 	render(){
 		return(
@@ -143,6 +158,9 @@ export default class EventCard extends React.Component{
 						<div style={styles.line}>
 							{getDay(this.props.ev.time)}, {this.props.ev.time.replace(this.props.ev.time.substring(this.props.ev.time.indexOf('T'), this.props.ev.time.length), "").replace('T', '@').replace('2019-', '').replace('-', '/')} at {parseDate(this.props.ev.time)} 
 						</div>
+            <div style={{...styles.line, fontWeight: 'bold'}}>
+							{this.props.ev.description}
+						</div>           
 						<div style={{...styles.line, marginBottom: 25,}}>
 							{this.props.ev.location} 
 						</div>            
@@ -155,6 +173,9 @@ export default class EventCard extends React.Component{
 							<div style={{...styles.icon, float:'right'}} className="pointer">
 								<FontAwesomeIcon onClick={() => this.props.join()} icon={faUserPlus} size="lg"/>
 							</div>
+              {this.props.authData.admin && <div style={{...styles.icon, float:'right'}} className="pointer">
+								<FontAwesomeIcon onClick={() => this.destroyEvent()} icon={faTrash} size="lg"/>
+							</div>}
 						</div>
 						<div style={styles.bottom_icons}>
 							<div style={styles.icon} className="pointer">

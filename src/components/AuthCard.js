@@ -13,6 +13,8 @@ class AuthCard extends React.Component{
       phone: '',
       password: '',
       confirmPassword: '',
+      firstName: '',
+      lastName: '',
       signingIn: false,
       newUser: false,
       signUpError: false,
@@ -37,6 +39,8 @@ class AuthCard extends React.Component{
                 password: this.state.password,
                 confirmPassword: this.state.confirmPassword,
                 phone: this.state.phone,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
               }),
       })
       .then((res) => res.json())
@@ -64,6 +68,8 @@ class AuthCard extends React.Component{
         email: this.state.email,
         password: this.state.password,
         phone: this.state.phone,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,        
       })
     })
     .then(() => this.props.authenticate(this.state.email, this.state.password, this.state.phone))
@@ -133,6 +139,12 @@ function NewUserComponent(props){
       </div>
       <div style={styles.input_div}>
         <input onChange={(ev) => props.this.setState({phone: ev.target.value})} value={props.this.state.phone} placeholder='Phone' />
+      </div>
+      <div style={styles.input_div}>
+        <input onChange={(ev) => props.this.setState({firstName: ev.target.value})} value={props.this.state.firstName} placeholder='First Name' />
+      </div>
+      <div style={styles.input_div}>
+        <input onChange={(ev) => props.this.setState({lastName: ev.target.value})} value={props.this.state.lastName} placeholder='Last Name' />
       </div>
       <div style={styles.input_div}>
         <input onChange={(ev) => props.this.setState({password: ev.target.value})} value={props.this.state.password} placeholder='Password' type="password" />

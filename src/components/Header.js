@@ -18,6 +18,7 @@ class Header extends React.Component{
 			where: '',
 			time: '',
       availability: '',
+      description: '',
 			tags: [],
 			button_text: 'Submit Event',
 			modal_display: 'none',
@@ -49,7 +50,8 @@ class Header extends React.Component{
 				where: this.state.where,
 				tags: this.state.tags,
 				time: this.state.time,
-				availability: this.state.availability,
+        availability: this.state.availability,
+        description: this.state.description,
        }),
     })
     .then((res) => {
@@ -131,8 +133,11 @@ class Header extends React.Component{
 								<div style={{marginBottom: 10}}>
 									<input style={{width: '100%'}} placeholder="When is it?" type="datetime-local" onChange={(ev) => this.setState({time: ev.target.value})} value={this.state.time} />
 								</div>
+                <div style={{marginBottom: 10}}>
+									<textarea style={{width: '100%', border: 'none', borderBottom: '3px solid #B9D9EB'}} placeholder="What's happening?" onChange={(ev) => this.setState({description: ev.target.value})} value={this.state.description} />
+								</div>               
 								<div style={{marginBottom: 10, display: 'flex'}}>
-									<input style={{width: '100%'}} placeholder="Location" onChange={(ev) => this.setState({where: ev.target.value})} value={this.state.where} />
+									<input style={{width: '100%'}} placeholder="Where is the event held?" onChange={(ev) => this.setState({where: ev.target.value})} value={this.state.where} />
 								</div>								
 								<div style={{marginBottom: 10, display: 'flex'}}>
 									{this.state.tags.map((tag,i) => {
@@ -144,7 +149,7 @@ class Header extends React.Component{
 										)
 									})}
 
-									<input placeholder="Add tags [ENTER to Add]" onKeyPress={(ev) => this.addTag(ev)} onChange={(ev) => this.setState({category: ev.target.value})} value={this.state.category} />
+									<input placeholder="Add descriptive tags as shown on the home page [ENTER to Add]" onKeyPress={(ev) => this.addTag(ev)} onChange={(ev) => this.setState({category: ev.target.value})} value={this.state.category} />
 								</div>
                 <div style={{height: '5vh'}}>
 									{this.state.loadText ? 
