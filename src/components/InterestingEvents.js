@@ -21,7 +21,7 @@ export default class InterestingEvents extends React.Component{
 			          }</b></div>)            
 				      return(
 				        <React.Fragment key={'interests ' + i}>
-				          <EventCard authData={this.props.authData} join={() => this.props.join(ev.id)} ev={ev} />
+				          {this.props.err ? <div>error retrieving events</div> : <EventCard authData={this.props.authData} join={() => this.props.join(ev.id)} ev={ev} />}
 				        </React.Fragment>
 				      )
 				    })}

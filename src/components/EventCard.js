@@ -120,13 +120,16 @@ export default class EventCard extends React.Component{
       headers: {
 				Accept: 'application/json',
       	'Content-Type': 'application/json',
-      	'authToken': this.props.authData.token
+        'authToken': this.props.authData.token,
+        'event_id': this.props.ev.id
      	 //'Content-Type':'application/x-www-form-urlencoded',
-        },
-        body: JSON.stringify({
-		    	event_id: this.props.ev.id
-		    })
+      },
+      body: JSON.stringify({
+        event_id: this.props.ev.id
+      })
     })
+    .then((res) => alert("The event was successfully deleted"))
+    .catch((err) => alert("ERROR: could not delete event"))
   }
 
 	render(){

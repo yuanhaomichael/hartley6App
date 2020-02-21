@@ -43,7 +43,7 @@ export default class AllEvents extends React.Component{
 			        <React.Fragment key={i}>
 			          {((today > curr_ev_time) && !(curr_ev_time - prev_ev_time < 86400000)) || (prev_ev_time < today && curr_ev_time > today) || ((604800000<(curr_ev_time-today)) && !(604800000<(prev_ev_time -today))) ? 
 			          	label : null}
-			          <EventCard authData={this.props.authData} join={() => this.props.join(ev.id)} ev={ev} />
+			          {this.props.err ? <div>Problem occurred fetching events</div> : <EventCard authData={this.props.authData} join={() => this.props.join(ev.id)} ev={ev} />}
 			        </React.Fragment>
 			      )
 			    })}

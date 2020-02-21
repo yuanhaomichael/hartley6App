@@ -20,6 +20,7 @@ class App extends React.Component {
       events: [],
       interests: [],
       interestedEvents: [],
+      err: false,
     }
     this.trash = this.trash.bind(this)
     this.join = this.join.bind(this)
@@ -35,7 +36,7 @@ class App extends React.Component {
         events: [...json['events']]
     }))
     .catch((err) => {
-      alert('There was an error retrieving events. ERROR: ' + err)
+      this.setState({err: true})
     })
   }
 
@@ -54,7 +55,7 @@ class App extends React.Component {
            })
          }})
         .catch((err) => {
-          alert('There was an error retrieving events. ERROR: ' + err)
+          this.setState({err: true})
         })       
        )
     }else{
@@ -71,7 +72,7 @@ class App extends React.Component {
            })
          }})
         .catch((err) => {
-          alert('There was an error retrieving events. ERROR: ' + err)
+          this.setState({err: true})
         })       
        )
     }
@@ -130,14 +131,15 @@ class App extends React.Component {
 
 
   render(){
+    console.log(this.state)
     return (
       <div className="App">
         <Header authData={this.props.auth} events={(json) => this.setState({events: json})} />
         {!this.props.auth.authenticated && <WelcomeCard />}              
         {!this.props.auth.authenticated && <AuthCard authenticate={(email, password, phone) => this.props.login(email, password, phone)} />}              
         <Interests updateInterests={(interest) => this.updateInterests(interest)} />
-        <InterestingEvents authData={this.props.auth} join={(id) => this.join(id)} events={this.state.interestedEvents}/>
-        <AllEvents authData={this.props.auth} join={(id) => this.join(id)} events={this.state.events}/>
+        <InterestingEvents err={this.state.err} authData={this.props.auth} join={(id) => this.join(id)} events={this.state.interestedEvents}/>
+        <AllEvents err={this.state.err} authData={this.props.auth} join={(id) => this.join(id)} events={this.state.events}/>
       </div>
     );
   }
