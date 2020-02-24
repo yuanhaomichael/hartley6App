@@ -23,6 +23,7 @@ export default function Interests(props){
       'Western Food',
       'Hartley 6',
       'John Jay 7',
+      'Hartley 9',
 		]
 		return(
 			<div style={styles.container}>
