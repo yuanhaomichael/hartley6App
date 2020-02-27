@@ -162,7 +162,7 @@ export default class EventCard extends React.Component{
 							{getDay(this.props.ev.time)}, {this.props.ev.time.replace(this.props.ev.time.substring(this.props.ev.time.indexOf('T'), this.props.ev.time.length), "").replace('T', '@').replace('2019-', '').replace('-', '/')} at {parseDate(this.props.ev.time)} 
 						</div>
             <div style={{...styles.line, fontWeight: 'bold'}}>
-							{this.props.ev.description}
+							<span style={{width: '100%'}}>{this.props.ev.description}</span>
 						</div>           
 						<div style={{...styles.line, marginBottom: 25,}}>
 							{this.props.ev.location} 
