@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Mobile first web app that aggregates all campus events with free food and swag. Built with Isaiah Thompkins when I was a resident advisor for Hartley 6. 
+
+Web App deployed on: https://eventoapp.netlify.app/
 
 ## Available Scripts
 
